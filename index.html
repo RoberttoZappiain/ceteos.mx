@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ceteos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              gold: {
+                50: '#fcfbf4',
+                100: '#f8f5e3',
+                200: '#f0e8c3',
+                300: '#e6d698',
+                400: '#dcc068',
+                500: '#d4af37',
+                600: '#aa8c2c',
+                700: '#887023',
+                800: '#715d24',
+                900: '#624f25',
+                950: '#382b10',
+              },
+              dark: {
+                bg: '#000000',
+                surface: '#121212',
+                border: '#333333'
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      body { 
+        font-family: 'Inter', sans-serif; 
+        background: #ffffff;
+        transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      /* Deep black background for dark mode */
+      .dark body {
+        background: #000000;
+      }
+      
+      /* Custom scrollbar for better aesthetics */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #f1f1f1; }
+      ::-webkit-scrollbar-thumb { background: #888; border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: #555; }
+      
+      /* Dark mode scrollbar with deep black */
+      .dark ::-webkit-scrollbar-track { background: #0a0a0a; }
+      .dark ::-webkit-scrollbar-thumb { background: #333333; }
+      .dark ::-webkit-scrollbar-thumb:hover { background: #555555; }
+
+      /* Animation for mobile drawer */
+      @keyframes slideInLeft {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(0); }
+      }
+      .slide-in-left {
+        animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      /* Infinite Marquee Animation for Brands */
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .animate-marquee {
+        animation: marquee 40s linear infinite;
+        width: max-content;
+        display: flex;
+      }
+      /* Pause animation on hover if needed */
+      .animate-marquee:hover {
+        animation-play-state: paused;
+      }
+      .slide-in-left {
+        animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      /* Animation for dropdown */
+      @keyframes fadeIn {
+        from { 
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to { 
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
+      }
+
+      /* Infinite Marquee Animation for Brands */
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .animate-marquee {
+        animation: marquee 40s linear infinite;
+        width: max-content;
+        display: flex;
+      }
+      /* Pause animation on hover if needed */
+      .animate-marquee:hover {
+        animation-play-state: paused;
+      }
+
+      /* Glassmorphism Effects - Philips Style Minimalist */
+      .glass-effect-minimal {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(8px) saturate(100%);
+        -webkit-backdrop-filter: blur(8px) saturate(100%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 
+          0 4px 16px 0 rgba(31, 38, 135, 0.08),
+          inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .dark .glass-effect-minimal {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 
+          0 4px 16px 0 rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+      }
+
+      /* Philips-style liquid glass enhanced */
+      .philips-glass {
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.08) 0%, 
+          rgba(255, 255, 255, 0.04) 45%, 
+          rgba(255, 255, 255, 0.06) 55%,
+          rgba(255, 255, 255, 0.08) 100%);
+        backdrop-filter: blur(20px) saturate(120%);
+        -webkit-backdrop-filter: blur(20px) saturate(120%);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 
+          0 8px 32px 0 rgba(31, 38, 135, 0.12),
+          inset 0 1px 0 0 rgba(255, 255, 255, 0.18),
+          inset 0 -1px 0 0 rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .dark .philips-glass {
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.03) 0%, 
+          rgba(255, 255, 255, 0.01) 45%, 
+          rgba(255, 255, 255, 0.02) 55%,
+          rgba(255, 255, 255, 0.03) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: 
+          0 8px 32px 0 rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+          inset 0 -1px 0 0 rgba(255, 255, 255, 0.02);
+      }
+
+      .philips-glass::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 150%;
+        height: 100%;
+        background: linear-gradient(105deg, 
+          transparent 20%,
+          rgba(255, 255, 255, 0.05) 30%,
+          rgba(255, 255, 255, 0.1) 40%,
+          rgba(255, 255, 255, 0.05) 50%,
+          transparent 60%);
+        animation: shimmer-1 8s infinite ease-in-out;
+        transform: skewX(-15deg);
+      }
+
+      .dark .philips-glass::before {
+        background: linear-gradient(105deg, 
+          transparent 20%,
+          rgba(255, 255, 255, 0.02) 30%,
+          rgba(255, 255, 255, 0.05) 40%,
+          rgba(255, 255, 255, 0.02) 50%,
+          transparent 60%);
+      }
+
+      /* Multiple glass layers */
+      .glass-layer-1 {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .glass-layer-2 {
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .glass-layer-3 {
+        background: rgba(255, 255, 255, 0.09);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+      }
+
+      .dark .glass-layer-1 {
+        background: rgba(255, 255, 255, 0.015);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .dark .glass-layer-2 {
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .dark .glass-layer-3 {
+        background: rgba(255, 255, 255, 0.035);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+      }
+
+      /* Enhanced hover effects for glass elements */
+      .glass-hover:hover {
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 
+          0 12px 40px 0 rgba(31, 38, 135, 0.15),
+          inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
+          0 0 20px 0 rgba(255, 255, 255, 0.05);
+      }
+
+      .dark .glass-hover:hover {
+        box-shadow: 
+          0 12px 40px 0 rgba(0, 0, 0, 0.6),
+          inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
+          0 0 20px 0 rgba(255, 255, 255, 0.05);
+      }
+
+      /* Theme transition smooth */
+      .theme-transition {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .theme-transition-slow {
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Interactive glass for buttons */
+      .glass-interactive {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 
+          0 4px 16px 0 rgba(31, 38, 135, 0.1),
+          inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+      }
+
+      .dark .glass-interactive {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .glass-interactive:active {
+        transform: translateY(1px);
+        box-shadow: 
+          0 2px 8px 0 rgba(31, 38, 135, 0.1),
+          inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+      }
+
+      /* Enhanced text contrast for deep black background */
+      .dark .text-gray-100 { color: #ffffff; }
+      .dark .text-gray-200 { color: #f3f4f6; }
+      .dark .text-gray-300 { color: #e5e7eb; }
+      .dark .text-gray-400 { color: #d1d5db; }
+      .dark .text-gray-500 { color: #9ca3af; }
+      
+      /* Enhanced contrast for headings on black background */
+      .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      }
+      
+      /* Performance optimizations for responsive glass effects */
+      @media (max-width: 768px) {
+        .glass-effect-minimal,
+        .philips-glass,
+        .glass-layer-1,
+        .glass-layer-2,
+        .glass-layer-3 {
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+        }
+      }
+
+      /* Accessibility - respect reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .philips-glass::before,
+        .shimmer-1,
+        .shimmer-2,
+        .shimmer-3,
+        .fiber-flow-1,
+        .fiber-flow-2,
+        .fiber-flow-3,
+        .float-isometric,
+        .float-isometric-2,
+        .pulse-glass,
+        .halftone-animated {
+          animation: none;
+        }
+        
+        .glass-hover {
+          transform: none;
+        }
+      }
+
+      /* Halftone Pattern System - Combined Subtle Technology */
+      .halftone-combined-subtle {
+        background-image: 
+          /* Layer 1: Classic halftone dots - base */
+          radial-gradient(circle at 20% 50%, rgba(255,255,255,0.03) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(255,255,255,0.02) 0%, transparent 50%),
+          radial-gradient(circle at 40% 20%, rgba(255,255,255,0.015) 0%, transparent 40%),
+          
+          /* Layer 2: Technology grid - structure */
+          linear-gradient(0deg, rgba(255,255,255,0.01) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px),
+          
+          /* Layer 3: Hexagonal geometry - modern */
+          conic-gradient(from 45deg at 50% 50%, transparent 0deg, rgba(255,255,255,0.02) 90deg, transparent 180deg, rgba(255,255,255,0.02) 270deg, transparent 360deg),
+          
+          /* Layer 4: Fiber optic pattern - dynamism */
+          repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.008) 20px, rgba(255,255,255,0.008) 21px),
+          repeating-linear-gradient(-45deg, transparent, transparent 25px, rgba(255,255,255,0.006) 25px, rgba(255,255,255,0.006) 26px);
+          
+        background-size: 
+          /* Dots sizes */
+          200px 200px, 
+          150px 150px, 
+          100px 100px,
+          /* Grid sizes */
+          50px 50px, 
+          50px 50px,
+          /* Hexagon size */
+          80px 80px,
+          /* Fiber optic sizes */
+          40px 40px,
+          60px 60px;
+          
+        background-position: 
+          /* Dots positions */
+          0 0, 
+          50px 50px, 
+          100px 100px,
+          /* Grid positions */
+          0 0, 
+          0 0,
+          /* Hexagon position */
+          0 0,
+          /* Fiber optic positions */
+          0 0,
+          0 0;
+          
+        background-attachment: fixed;
+        background-repeat: repeat;
+        opacity: 0.6;
+        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Light mode halftone - very subtle */
+      .halftone-combined-subtle.light-mode {
+        background-image: 
+          /* Layer 1: Classic halftone dots - black */
+          radial-gradient(circle at 20% 50%, rgba(0,0,0,0.02) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(0,0,0,0.015) 0%, transparent 50%),
+          radial-gradient(circle at 40% 20%, rgba(0,0,0,0.01) 0%, transparent 40%),
+          
+          /* Layer 2: Technology grid - black */
+          linear-gradient(0deg, rgba(0,0,0,0.008) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0,0,0,0.008) 1px, transparent 1px),
+          
+          /* Layer 3: Hexagonal geometry - black */
+          conic-gradient(from 45deg at 50% 50%, transparent 0deg, rgba(0,0,0,0.015) 90deg, transparent 180deg, rgba(0,0,0,0.015) 270deg, transparent 360deg),
+          
+          /* Layer 4: Fiber optic pattern - black */
+          repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.005) 20px, rgba(0,0,0,0.005) 21px),
+          repeating-linear-gradient(-45deg, transparent, transparent 25px, rgba(0,0,0,0.004) 25px, rgba(0,0,0,0.004) 26px);
+          
+        opacity: 0.3;
+      }
+
+      /* Dark mode enhanced halftone */
+      .dark .halftone-combined-subtle {
+        opacity: 0.8;
+      }
+
+      /* Performance optimizations */
+      .halftone-combined-subtle {
+        transform: translateZ(0);
+        will-change: transform, opacity;
+        contain: paint;
+      }
+
+      /* Halftone Animations - Subtle and Adaptive */
+      @keyframes halftone-drift {
+        0%, 100% { 
+          background-position: 
+            0 0, 
+            50px 50px, 
+            100px 100px,
+            0 0, 
+            0 0,
+            0 0,
+            0 0,
+            0 0; 
+        }
+        33% { 
+          background-position: 
+            10px 10px, 
+            60px 60px, 
+            110px 110px,
+            5px 5px, 
+            5px 5px,
+            5px 5px,
+            5px 5px,
+            5px 5px; 
+        }
+        66% { 
+          background-position: 
+            -10px -10px, 
+            40px 40px, 
+            90px 90px,
+            -5px -5px, 
+            -5px -5px,
+            -5px -5px,
+            -5px -5px,
+            -5px -5px; 
+        }
+      }
+
+      @keyframes halftone-pulse {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.5; }
+      }
+
+      @keyframes halftone-rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      @keyframes halftone-breathe {
+        0%, 100% { 
+          transform: scale(1);
+          opacity: 0.3;
+        }
+        50% { 
+          transform: scale(1.01);
+          opacity: 0.4;
+        }
+      }
+
+      /* Animated halftone class */
+      .halftone-animated {
+        animation: 
+          halftone-drift 20s ease-in-out infinite,
+          halftone-pulse 8s ease-in-out infinite;
+      }
+
+      /* Separate animation for breathing effect */
+      .halftone-breathing {
+        animation: halftone-breathe 6s ease-in-out infinite;
+      }
+
+      /* Responsive animation adjustments */
+      @media (max-width: 1024px) {
+        .halftone-animated {
+          animation-duration: 25s, 10s;
+        }
+        
+        .halftone-breathing {
+          animation-duration: 8s;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .halftone-animated {
+          animation-duration: 30s, 12s;
+        }
+        
+        .halftone-breathing {
+          animation-duration: 10s;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .halftone-animated {
+          animation-duration: 35s, 14s;
+        }
+        
+        .halftone-breathing {
+          animation-duration: 12s;
+        }
+      }
+
+      /* Dark mode animation adjustments */
+      .dark .halftone-animated {
+        animation: 
+          halftone-drift 25s ease-in-out infinite,
+          halftone-pulse 10s ease-in-out infinite;
+      }
+
+      .dark .halftone-breathing {
+        animation: halftone-breathe 8s ease-in-out infinite;
+      }
+
+      /* Responsive optimizations for halftone patterns */
+      @media (max-width: 1024px) {
+        .halftone-combined-subtle {
+          background-size: 
+            180px 180px, 
+            130px 130px, 
+            90px 90px,
+            45px 45px, 
+            45px 45px,
+            70px 70px,
+            35px 35px,
+            55px 55px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .halftone-combined-subtle {
+          background-size: 
+            150px 150px, 
+            100px 100px, 
+            75px 75px,
+            40px 40px, 
+            40px 40px,
+            60px 60px,
+            30px 30px,
+            45px 45px;
+          
+          opacity: 0.3; /* Reduce intensity on mobile */
+        }
+        
+        .dark .halftone-combined-subtle {
+          opacity: 0.6;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .halftone-combined-subtle {
+          background-size: 
+            120px 120px, 
+            80px 80px, 
+            60px 60px,
+            30px 30px, 
+            30px 30px,
+            50px 50px,
+            25px 25px,
+            35px 35px;
+          
+          opacity: 0.2; /* Even more subtle on small screens */
+        }
+        
+        .dark .halftone-combined-subtle {
+          opacity: 0.4;
+        }
+      }
+
+      /* Performance optimizations for halftone */
+      .halftone-combined-subtle.halftone-mobile {
+        contain: layout style paint;
+        isolation: isolate;
+      }
+
+      .halftone-combined-subtle.halftone-tablet {
+        contain: style paint;
+      }
+
+      /* GPU acceleration for smooth animations */
+      .halftone-animated {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+      }
+
+      /* Memory optimization for background patterns */
+      .halftone-combined-subtle {
+        background-clip: padding-box;
+        background-origin: padding-box;
+      }
+
+      /* Interaction with glassmorphism - ensure proper layering */
+      .halftone-combined-subtle {
+        z-index: 0;
+      }
+
+      /* Ensure glass elements appear above halftone */
+      .philips-glass,
+      .glass-effect-minimal,
+      .glass-interactive,
+      .glass-layer-1,
+      .glass-layer-2,
+      .glass-layer-3 {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Navigation and other UI elements should always be on top */
+      .z-[60],
+      .z-[100],
+      .z-[110],
+      .z-[150],
+      .z-[200] {
+        position: relative;
+      }
+
+      /* Additional Halftone Pattern Variants */
+      
+      /* Dots Pattern Variant */
+      .halftone-dots-subtle {
+        background-image: 
+          radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 50%),
+          radial-gradient(circle at 40% 20%, rgba(255,255,255,0.02) 0%, transparent 40%);
+        background-size: 200px 200px, 150px 150px, 100px 100px;
+        background-position: 0 0, 50px 50px, 100px 100px;
+        background-attachment: fixed;
+        opacity: 0.6;
+      }
+
+      .halftone-dots-medium {
+        background-image: 
+          radial-gradient(circle at 20% 50%, rgba(255,255,255,0.06) 0%, transparent 45%),
+          radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 45%),
+          radial-gradient(circle at 40% 20%, rgba(255,255,255,0.04) 0%, transparent 35%);
+        background-size: 180px 180px, 130px 130px, 80px 80px;
+        background-position: 0 0, 40px 40px, 80px 80px;
+        background-attachment: fixed;
+        opacity: 0.8;
+      }
+
+      /* Grid Pattern Variant */
+      .halftone-grid-subtle {
+        background-image: 
+          linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+          radial-gradient(circle at center, rgba(255,255,255,0.03) 1px, transparent 1px);
+        background-size: 50px 50px, 50px 50px, 25px 25px;
+        background-attachment: fixed;
+        opacity: 0.5;
+      }
+
+      .halftone-grid-medium {
+        background-image: 
+          linear-gradient(0deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+          radial-gradient(circle at center, rgba(255,255,255,0.05) 1.5px, transparent 1.5px);
+        background-size: 40px 40px, 40px 40px, 20px 20px;
+        background-attachment: fixed;
+        opacity: 0.7;
+      }
+
+      /* Hexagon Pattern Variant */
+      .halftone-hexagon-subtle {
+        background-image: 
+          conic-gradient(from 45deg at 50% 50%, transparent 0deg, rgba(255,255,255,0.03) 90deg, transparent 180deg, rgba(255,255,255,0.03) 270deg, transparent 360deg),
+          radial-gradient(circle at 30% 30%, rgba(255,255,255,0.02) 0%, transparent 40%);
+        background-size: 80px 80px, 120px 120px;
+        background-attachment: fixed;
+        opacity: 0.5;
+      }
+
+      .halftone-hexagon-medium {
+        background-image: 
+          conic-gradient(from 45deg at 50% 50%, transparent 0deg, rgba(255,255,255,0.05) 90deg, transparent 180deg, rgba(255,255,255,0.05) 270deg, transparent 360deg),
+          radial-gradient(circle at 30% 30%, rgba(255,255,255,0.04) 0%, transparent 35%);
+        background-size: 60px 60px, 100px 100px;
+        background-attachment: fixed;
+        opacity: 0.7;
+      }
+
+      /* Fiber Pattern Variant */
+      .halftone-fiber-subtle {
+        background-image: 
+          repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.02) 20px, rgba(255,255,255,0.02) 21px),
+          repeating-linear-gradient(-45deg, transparent, transparent 25px, rgba(255,255,255,0.015) 25px, rgba(255,255,255,0.015) 26px),
+          radial-gradient(circle at 50% 50%, rgba(255,255,255,0.01) 0%, transparent 30%);
+        background-size: 40px 40px, 60px 60px, 80px 80px;
+        background-attachment: fixed;
+        opacity: 0.5;
+      }
+
+      .halftone-fiber-medium {
+        background-image: 
+          repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(255,255,255,0.04) 18px, rgba(255,255,255,0.04) 19px),
+          repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(255,255,255,0.03) 22px, rgba(255,255,255,0.03) 23px),
+          radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02) 0%, transparent 25%);
+        background-size: 35px 35px, 50px 50px, 70px 70px;
+        background-attachment: fixed;
+        opacity: 0.7;
+      }
+
+      /* Extra-Bold Variants for Maximum Visibility */
+      .halftone-dots-extra-bold {
+        background-image: 
+          radial-gradient(circle at 20% 50%, rgba(255,255,255,0.12) 0%, transparent 35%),
+          radial-gradient(circle at 80% 80%, rgba(255,255,255,0.10) 0%, transparent 35%),
+          radial-gradient(circle at 40% 20%, rgba(255,255,255,0.08) 0%, transparent 25%);
+        background-size: 200px 200px, 150px 150px, 100px 100px;
+        background-position: 0 0, 30px 30px, 60px 60px;
+        background-attachment: fixed;
+        opacity: 1.2;
+      }
+
+      .halftone-grid-extra-bold {
+        background-image: 
+          linear-gradient(0deg, rgba(255,255,255,0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px),
+          radial-gradient(circle at center, rgba(255,255,255,0.10) 2px, transparent 2px);
+        background-size: 30px 30px, 30px 30px, 15px 15px;
+        background-attachment: fixed;
+        opacity: 1.0;
+      }
+
+      .halftone-hexagon-extra-bold {
+        background-image: 
+          conic-gradient(from 45deg at 50% 50%, transparent 0deg, rgba(255,255,255,0.08) 90deg, transparent 180deg, rgba(255,255,255,0.08) 270deg, transparent 360deg),
+          radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06) 0%, transparent 30%);
+        background-size: 40px 40px, 80px 80px;
+        background-attachment: fixed;
+        opacity: 1.0;
+      }
+
+      .halftone-fiber-extra-bold {
+        background-image: 
+          repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(255,255,255,0.08) 15px, rgba(255,255,255,0.08) 16px),
+          repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255,255,255,0.06) 20px, rgba(255,255,255,0.06) 21px),
+          radial-gradient(circle at 50% 50%, rgba(255,255,255,0.04) 0%, transparent 20%);
+        background-size: 30px 30px, 40px 40px, 60px 60px;
+        background-attachment: fixed;
+        opacity: 1.0;
+      }
+
+      /* Combined Pattern Additional Intensities */
+      .halftone-combined-medium {
+        background-image: 
+          /* Layer 1: Enhanced halftone dots */
+          radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 45%),
+          radial-gradient(circle at 80% 80%, rgba(255,255,255,0.04) 0%, transparent 45%),
+          radial-gradient(circle at 40% 20%, rgba(255,255,255,0.03) 0%, transparent 35%),
+          
+          /* Layer 2: Enhanced technology grid */
+          linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+          
+          /* Layer 3: Enhanced hexagonal geometry */
+          conic-gradient(from 45deg at 50% 50%, transparent 0deg, rgba(255,255,255,0.04) 90deg, transparent 180deg, rgba(255,255,255,0.04) 270deg, transparent 360deg),
+          
+          /* Layer 4: Enhanced fiber optic pattern */
+          repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(255,255,255,0.02) 18px, rgba(255,255,255,0.02) 19px),
+          repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(255,255,255,0.015) 22px, rgba(255,255,255,0.015) 23px);
+          
+        opacity: 0.8;
+      }
+
+      .halftone-combined-bold {
+        background-image: 
+          /* Layer 1: Bold halftone dots */
+          radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 40%),
+          radial-gradient(circle at 80% 80%, rgba(255,255,255,0.06) 0%, transparent 40%),
+          radial-gradient(circle at 40% 20%, rgba(255,255,255,0.05) 0%, transparent 30%),
+          
+          /* Layer 2: Bold technology grid */
+          linear-gradient(0deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+          
+          /* Layer 3: Bold hexagonal geometry */
+          conic-gradient(from 45deg at 50% 50%, transparent 0deg, rgba(255,255,255,0.06) 90deg, transparent 180deg, rgba(255,255,255,0.06) 270deg, transparent 360deg),
+          
+          /* Layer 4: Bold fiber optic pattern */
+          repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(255,255,255,0.03) 15px, rgba(255,255,255,0.03) 16px),
+          repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255,255,255,0.02) 20px, rgba(255,255,255,0.02) 21px);
+          
+        opacity: 1.0;
+      }
+
+      /* Light mode variants for all patterns */
+      .halftone-dots-subtle.light-mode,
+      .halftone-grid-subtle.light-mode,
+      .halftone-hexagon-subtle.light-mode,
+      .halftone-fiber-subtle.light-mode {
+        background-image: 
+          radial-gradient(circle at 20% 50%, rgba(0,0,0,0.02) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(0,0,0,0.015) 0%, transparent 50%),
+          radial-gradient(circle at 40% 20%, rgba(0,0,0,0.01) 0%, transparent 40%);
+        opacity: 0.4;
+      }
+
+      .halftone-dots-medium.light-mode,
+      .halftone-grid-medium.light-mode,
+      .halftone-hexagon-medium.light-mode,
+      .halftone-fiber-medium.light-mode,
+      .halftone-combined-medium.light-mode {
+        opacity: 0.6;
+      }
+
+      .halftone-combined-bold.light-mode {
+        opacity: 0.8;
+      }
+
+      .halftone-combined-extra-bold {
+        background-image: 
+          /* Layer 1: Extra-bold halftone dots */
+          radial-gradient(circle at 20% 50%, rgba(255,255,255,0.12) 0%, transparent 35%),
+          radial-gradient(circle at 80% 80%, rgba(255,255,255,0.10) 0%, transparent 35%),
+          radial-gradient(circle at 40% 20%, rgba(255,255,255,0.08) 0%, transparent 25%),
+          
+          /* Layer 2: Extra-bold technology grid */
+          linear-gradient(0deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+          
+          /* Layer 3: Extra-bold hexagonal geometry */
+          conic-gradient(from 45deg at 50% 50%, transparent 0deg, rgba(255,255,255,0.08) 90deg, transparent 180deg, rgba(255,255,255,0.08) 270deg, transparent 360deg),
+          
+          /* Layer 4: Extra-bold fiber optic pattern */
+          repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(255,255,255,0.05) 12px, rgba(255,255,255,0.05) 13px),
+          repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(255,255,255,0.04) 18px, rgba(255,255,255,0.04) 19px);
+          
+        opacity: 1.2;
+      }
+
+      .halftone-combined-extra-bold.light-mode {
+        opacity: 1.0;
+      }
+
+      .halftone-dots-extra-bold.light-mode,
+      .halftone-grid-extra-bold.light-mode,
+      .halftone-hexagon-extra-bold.light-mode,
+      .halftone-fiber-extra-bold.light-mode {
+        opacity: 0.8;
+      }
+
+      /* Isometric Pattern Variants - Specific technological patterns */
+      
+      /* Isometric Grid - 3D-like perspective pattern */
+      .halftone-isometric-subtle {
+        background-image: 
+          linear-gradient(60deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+          linear-gradient(-60deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+          linear-gradient(0deg, rgba(255,255,255,0.01) 1px, transparent 1px),
+          radial-gradient(circle at 25% 25%, rgba(255,255,255,0.015) 0%, transparent 20%);
+        background-size: 40px 40px, 40px 40px, 20px 20px, 80px 80px;
+        background-position: 0 0, 0 0, 0 0, 0 0;
+        background-attachment: fixed;
+        opacity: 0.5;
+      }
+
+      .halftone-isometric-medium {
+        background-image: 
+          linear-gradient(60deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+          linear-gradient(-60deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+          linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+          radial-gradient(circle at 25% 25%, rgba(255,255,255,0.03) 0%, transparent 18%);
+        background-size: 35px 35px, 35px 35px, 18px 18px, 70px 70px;
+        background-position: 0 0, 0 0, 0 0, 0 0;
+        background-attachment: fixed;
+        opacity: 0.7;
+      }
+
+      /* Isometric Cubes - 3D cube pattern */
+      .halftone-isometric-cubes-subtle {
+        background-image: 
+          linear-gradient(30deg, rgba(255,255,255,0.02) 0%, transparent 30%),
+          linear-gradient(-30deg, rgba(255,255,255,0.02) 0%, transparent 30%),
+          linear-gradient(90deg, rgba(255,255,255,0.015) 0%, transparent 30%),
+          linear-gradient(0deg, rgba(255,255,255,0.015) 0%, transparent 30%);
+        background-size: 60px 60px, 60px 60px, 60px 60px, 60px 60px;
+        background-position: 0 0, 30px 0, 0 30px, 30px 30px;
+        background-attachment: fixed;
+        opacity: 0.4;
+      }
+
+      .halftone-isometric-cubes-medium {
+        background-image: 
+          linear-gradient(30deg, rgba(255,255,255,0.04) 0%, transparent 25%),
+          linear-gradient(-30deg, rgba(255,255,255,0.04) 0%, transparent 25%),
+          linear-gradient(90deg, rgba(255,255,255,0.03) 0%, transparent 25%),
+          linear-gradient(0deg, rgba(255,255,255,0.03) 0%, transparent 25%);
+        background-size: 50px 50px, 50px 50px, 50px 50px, 50px 50px;
+        background-position: 0 0, 25px 0, 0 25px, 25px 25px;
+        background-attachment: fixed;
+        opacity: 0.6;
+      }
+
+      /* Isometric Dots - 3D perspective dots */
+      .halftone-isometric-dots-subtle {
+        background-image: 
+          radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.025) 0%, transparent 50%),
+          radial-gradient(ellipse at 70% 70%, rgba(255,255,255,0.02) 0%, transparent 50%),
+          radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.015) 0%, transparent 40%);
+        background-size: 100px 100px, 80px 80px, 60px 60px;
+        background-position: 0 0, 40px 40px, 80px 80px;
+        background-attachment: fixed;
+        opacity: 0.5;
+      }
+
+      .halftone-isometric-dots-medium {
+        background-image: 
+          radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.04) 0%, transparent 45%),
+          radial-gradient(ellipse at 70% 70%, rgba(255,255,255,0.03) 0%, transparent 45%),
+          radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.025) 0%, transparent 35%);
+        background-size: 90px 90px, 70px 70px, 50px 50px;
+        background-position: 0 0, 35px 35px, 70px 70px;
+        background-attachment: fixed;
+        opacity: 0.7;
+      }
+
+      /* Circuit Board Pattern - Technology inspired */
+      .halftone-circuit-subtle {
+        background-image: 
+          linear-gradient(90deg, rgba(255,255,255,0.02) 2px, transparent 2px),
+          linear-gradient(0deg, rgba(255,255,255,0.02) 2px, transparent 2px),
+          radial-gradient(circle at 20% 20%, rgba(255,255,255,0.015) 0%, transparent 3px),
+          radial-gradient(circle at 80% 80%, rgba(255,255,255,0.015) 0%, transparent 3px),
+          linear-gradient(45deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+        background-size: 40px 40px, 40px 40px, 60px 60px, 60px 60px, 80px 80px;
+        background-position: 0 0, 0 0, 0 0, 40px 40px, 0 0;
+        background-attachment: fixed;
+        opacity: 0.5;
+      }
+
+      .halftone-circuit-medium {
+        background-image: 
+          linear-gradient(90deg, rgba(255,255,255,0.04) 2px, transparent 2px),
+          linear-gradient(0deg, rgba(255,255,255,0.04) 2px, transparent 2px),
+          radial-gradient(circle at 20% 20%, rgba(255,255,255,0.03) 0%, transparent 3px),
+          radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 3px),
+          linear-gradient(45deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 35px 35px, 35px 35px, 50px 50px, 50px 50px, 70px 70px;
+        background-position: 0 0, 0 0, 0 0, 35px 35px, 0 0;
+        background-attachment: fixed;
+        opacity: 0.7;
+      }
+
+      /* Light mode variants for isometric patterns */
+      .halftone-isometric-subtle.light-mode,
+      .halftone-isometric-cubes-subtle.light-mode,
+      .halftone-isometric-dots-subtle.light-mode,
+      .halftone-circuit-subtle.light-mode {
+        background-image: 
+          linear-gradient(60deg, rgba(0,0,0,0.015) 1px, transparent 1px),
+          linear-gradient(-60deg, rgba(0,0,0,0.015) 1px, transparent 1px),
+          linear-gradient(0deg, rgba(0,0,0,0.01) 1px, transparent 1px),
+          radial-gradient(circle at 25% 25%, rgba(0,0,0,0.01) 0%, transparent 20%);
+        opacity: 0.3;
+      }
+
+      .halftone-isometric-medium.light-mode,
+      .halftone-isometric-cubes-medium.light-mode,
+      .halftone-isometric-dots-medium.light-mode,
+      .halftone-circuit-medium.light-mode {
+        opacity: 0.5;
+      }
+
+
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

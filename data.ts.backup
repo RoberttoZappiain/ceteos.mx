@@ -1,0 +1,44 @@
+import { Product, BlogPost, Category } from './types';
+
+export const categories: Category[] = [
+  { id: 1, name: "Aplicaciones Web", iconClass: "fa-solid fa-globe", href: "#" },
+  { id: 2, name: "Aplicaciones Móvil", iconClass: "fa-solid fa-mobile-screen", href: "#" },
+  { id: 3, name: "Apps con Base de Datos", iconClass: "fa-solid fa-database", href: "#" },
+  { id: 4, name: "Mantenimiento Site", iconClass: "fa-solid fa-server", href: "#" },
+  { id: 5, name: "Mantenimiento CCTV", iconClass: "fa-solid fa-video", href: "#" },
+  { id: 6, name: "Licencias Suite Adobe", iconClass: "fa-solid fa-pen-nib", href: "#" },
+  { id: 7, name: "Licencias Microsoft", iconClass: "fa-brands fa-windows", href: "#" },
+  { id: 8, name: "Licencias Autodesk", iconClass: "fa-solid fa-compass-drafting", href: "#" },
+  { id: 9, name: "Menús Digitales", iconClass: "fa-solid fa-utensils", href: "#" },
+  { id: 10, name: "Soporte Técnico", iconClass: "fa-solid fa-headset", href: "#contact-footer" },
+];
+
+export const products: Product[] = [
+  { id: 1, name: "Bolso de Cuero", price: 115.00, image: "https://picsum.photos/300/300?random=1", category: "Accesorios" },
+  { id: 2, name: "Zapatos de Tacón", price: 115.00, image: "https://picsum.photos/300/300?random=2", category: "Calzado" },
+  { id: 3, name: "Sudadera Casual", price: 40.00, oldPrice: 45.00, image: "https://picsum.photos/300/300?random=3", category: "Ropa", isSale: true },
+  { id: 4, name: "Camisa sin Mangas", price: 35.00, image: "https://picsum.photos/300/300?random=4", category: "Ropa" },
+  { id: 5, name: "Vestido Cuello V", price: 25.00, image: "https://picsum.photos/300/300?random=5", category: "Ropa" },
+  { id: 6, name: "Suéter Largo", price: 70.00, oldPrice: 90.00, image: "https://picsum.photos/300/300?random=6", category: "Ropa", isSale: true },
+  { id: 7, name: "Mini Falda", price: 40.00, oldPrice: 50.00, image: "https://picsum.photos/300/300?random=7", category: "Ropa", isSale: true },
+  { id: 8, name: "Mochila Urbana", price: 45.00, oldPrice: 55.00, image: "https://picsum.photos/300/300?random=8", category: "Accesorios", isSale: true },
+  { id: 9, name: "Abrigo Largo Azul", price: 85.00, image: "https://picsum.photos/300/300?random=9", category: "Ropa" },
+  { id: 10, name: "Botas de Fiesta", price: 30.00, oldPrice: 35.00, image: "https://picsum.photos/300/300?random=10", category: "Calzado", isSale: true },
+];
+
+export const blogPosts: BlogPost[] = [
+  { id: 1, title: "Descuento de Fin de Semana", date: "26 Abril, 2023", author: "EquipoDemo", excerpt: "Tempora fermentum, ipsam quae egestas habitant pretium...", image: "https://picsum.photos/400/250?random=11" },
+  { id: 2, title: "Colección de Moda Moderna", date: "26 Abril, 2023", author: "EquipoDemo", excerpt: "Tempora fermentum, ipsam quae egestas habitant pretium...", image: "https://picsum.photos/400/250?random=12" },
+  { id: 3, title: "Ofertas de Verano", date: "26 Abril, 2023", author: "EquipoDemo", excerpt: "Tempora fermentum, ipsam quae egestas habitant pretium...", image: "https://picsum.photos/400/250?random=13" },
+  { id: 4, title: "Mejores Vestidos de Diseñador", date: "26 Abril, 2023", author: "EquipoDemo", excerpt: "Tempora fermentum, ipsam quae egestas habitant pretium...", image: "https://picsum.photos/400/250?random=14" },
+];
+
+export const brands = [
+  { name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
+  { name: "Autodesk", logo: "https://upload.wikimedia.org/wikipedia/commons/6/64/Autodesk_logo.svg" },
+  { name: "Adobe", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg" },
+  { name: "Cisco", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
+  { name: "Hikvision", logo: "https://upload.wikimedia.org/wikipedia/commons/2/22/Hikvision_logo.svg" },
+  { name: "Dahua", logo: "https://upload.wikimedia.org/wikipedia/commons/1/14/Dahua_Technology_logo.svg" },
+  { name: "WordPress", logo: "https://upload.wikimedia.org/wikipedia/commons/9/98/WordPress_blue_logo.svg" },
+];
