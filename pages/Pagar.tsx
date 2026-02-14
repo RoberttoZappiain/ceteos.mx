@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Pagar: React.FC = () => {
   return (
-    <div className="container mx-auto px-4 md:px-8 py-16 relative z-10">
+    <div className="container mx-auto px-4 md:px-8 py-4 relative z-10">
       
       {/* Breadcrumb */}
       <nav className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-8 animate-fade-in">
@@ -41,7 +41,7 @@ export const Pagar: React.FC = () => {
                  </div>
                  <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Monto a Pagar (MXN)</label>
-                    <input type="number" placeholder="0.00" className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-colors text-sm dark:text-white font-mono" />
+                    <input type="number" placeholder="0.00" className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-colors text-sm dark:text-white font-sans" />
                  </div>
               </div>
               
@@ -77,7 +77,7 @@ export const Pagar: React.FC = () => {
                        <i className="fa-regular fa-copy"></i>
                     </div>
                     <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">CLABE Interbancaria</p>
-                    <p className="text-lg font-mono font-bold text-gray-900 dark:text-white tracking-widest">012 180 0158963452 8</p>
+                    <p className="text-lg font-sans font-bold text-gray-900 dark:text-white tracking-widest">012 180 0158963452 8</p>
                  </div>
                  <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-6 relative group cursor-pointer hover:border-blue-500/50 transition-colors">
                     <div className="absolute top-4 right-4 text-gray-400 group-hover:text-blue-500">

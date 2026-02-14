@@ -9,9 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "konva": "^10.2.0",
     "react": "^19.2.3",
+    "react-device-frameset": "^1.3.4",
     "react-dom": "^19.2.3",
-    "react-router-dom": "^7.13.0"
+    "react-konva": "^19.2.2",
+    "react-router-dom": "^7.13.0",
+    "use-image": "^1.1.4"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

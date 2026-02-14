@@ -41,6 +41,7 @@
         font-family: 'Inter', sans-serif; 
         background: #ffffff;
         transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-x: hidden;
       }
       
       /* Deep black background for dark mode */
@@ -64,8 +65,13 @@
         from { transform: translateX(-100%); }
         to { transform: translateX(0); }
       }
-      .slide-in-left {
-        animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      /* Animation for mobile drawer */
+      @keyframes slideInRight {
+        from { transform: translateX(100%); }
+        to { transform: translateX(0); }
+      }
+      .slide-in-right {
+        animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
       /* Infinite Marquee Animation for Brands */
@@ -82,8 +88,13 @@
       .animate-marquee:hover {
         animation-play-state: paused;
       }
-      .slide-in-left {
-        animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      /* Animation for mobile drawer */
+      @keyframes slideInRight {
+        from { transform: translateX(100%); }
+        to { transform: translateX(0); }
+      }
+      .slide-in-right {
+        animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
       /* Animation for dropdown */

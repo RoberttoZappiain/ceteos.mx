@@ -14,7 +14,7 @@ export const Licencias: React.FC = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 md:px-8 py-16 relative z-10">
+    <div className="container mx-auto px-4 md:px-8 py-4 relative z-10">
       
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-8 animate-fade-in">

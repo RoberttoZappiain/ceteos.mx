@@ -14,43 +14,45 @@ interface TopBarProps {
 
 export const TopBar: React.FC<TopBarProps> = ({ isDarkMode, toggleTheme }) => {
   return (
-    <div className="bg-white/30 dark:bg-black/30 backdrop-blur-md text-black dark:text-white text-[10px] py-2 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center tracking-[0.2em] border-b border-white/10 z-[60] relative font-bold uppercase">
-      <div className="flex gap-6 mb-2 md:mb-0">
+    <div className="bg-white/30 dark:bg-black/30 backdrop-blur-md text-black dark:text-white text-[10px] py-3 md:py-2 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center tracking-[0.2em] border-b border-white/10 z-[60] relative font-bold uppercase gap-3 md:gap-0">
+      <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-1 md:mb-0">
         <Link to="/mi-cuenta" className="hover:text-gold-500 transition-colors">Mi Cuenta</Link>
         <Link to="/pagar" className="hover:text-gold-500 transition-colors">Pagar</Link>
         <Link to="/faq" className="hover:text-gold-500 transition-colors">FAQ</Link>
         <Link to="/soporte-tecnico" className="hover:text-gold-500 transition-colors">Soporte</Link>
       </div>
-      <div className="flex items-center gap-6 m-4">
-        <button 
-          onClick={toggleTheme} 
-          className="flex items-center gap-2 hover:text-gold-500 transition-colors group"
-          title={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-        >
-          <i className={`fa-solid ${isDarkMode ? 'fa-sun' : 'fa-moon'} text-xs group-hover:rotate-12 transition-transform`}></i>
-          <span className=" sm:inline">{isDarkMode ? 'MODO CLARO' : 'MODO OSCURO'}</span>
-        </button>
-
-      </div> 
-        <div className="flex gap-4 text-gray-600 dark:text-gray-400">
+      <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 w-full md:w-auto justify-center">
+        <div className="flex items-center gap-6">
+            <button 
+            onClick={toggleTheme} 
+            className="flex items-center gap-2 hover:text-gold-500 transition-colors group"
+            title={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+            >
+            <i className={`fa-solid ${isDarkMode ? 'fa-sun' : 'fa-moon'} text-xs group-hover:rotate-12 transition-transform`}></i>
+            <span className=" sm:inline">{isDarkMode ? 'MODO CLARO' : 'MODO OSCURO'}</span>
+            </button>
+        </div>
+        
+        <div className="flex gap-6 text-gray-600 dark:text-gray-400">
            <i className="fa-brands fa-facebook-f hover:text-gold-500 cursor-pointer transition-all hover:scale-110"></i>
            <i className="fa-brands fa-twitter hover:text-gold-500 cursor-pointer transition-all hover:scale-110"></i>
            <i className="fa-brands fa-instagram hover:text-gold-500 cursor-pointer transition-all hover:scale-110"></i>
            <i className="fa-brands fa-youtube hover:text-gold-500 cursor-pointer transition-all hover:scale-110"></i>
         </div>
+      </div>
     </div>
   );
 };
 
 export const MainHeader: React.FC = () => {
   return (
-    <div className="py-8 px-4 md:px-8 relative z-[60]">
-      <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
+    <div className="hidden lg:block py-6 md:py-8 px-4 md:px-8 relative z-[60]">
+      <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8">
         
         {/* Logo */}
         <div className="flex items-center gap-3 group cursor-pointer">
            
-           <div>
+           <div className="text-center lg:text-left">
              <h1 className="text-3xl font-black tracking-tighter dark:text-white uppercase">ceteos<span className="text-gold-500">.</span>MX</h1>
              <p className="text-[9px] font-bold tracking-[0.35em] text-gray-500 dark:text-gray-400 uppercase mt-1">la compañía más conectada</p>
            </div>
@@ -95,6 +97,18 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContact, mobileMen
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
 
+  // Scroll lock when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 150);
@@ -112,6 +126,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContact, mobileMen
   ];
 
   const getLinkClass = (path: string) => {
+    // Exact match or if path is root and pathname is root
     const isActive = pathname === path;
     return `relative transition-colors hover:text-gold-500 ${
       isActive 
@@ -133,20 +148,29 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContact, mobileMen
   };
 
   return (
-    <div className={`sticky top-6 z-[100] transition-all duration-500 px-4 md:px-8 flex justify-center w-full`}>
+    <div id="main-navigation" className={`sticky top-0 lg:top-6 z-[100] transition-all duration-500 px-0 md:px-8 flex justify-center w-full`}>
       <div className={`
-        max-w-6xl w-full philips-glass glass-hover rounded-[2rem] px-6 md:px-10 h-20
-        flex items-center justify-between transition-all duration-500 border border-white/20 shadow-2xl
-        ${scrolled ? 'scale-[0.95] mt-0 backdrop-blur-2xl' : 'mt-2'}
+        max-w-6xl w-full philips-glass glass-hover rounded-none md:rounded-[2rem] px-6 md:px-10 h-16 md:h-20
+        flex items-center justify-between transition-all duration-500 border-b md:border border-white/20 shadow-2xl
+        ${scrolled ? 'md:scale-[0.95] mt-0 backdrop-blur-2xl' : 'mt-0 md:mt-2'}
       `}>
         
-        {/* Categories Trigger */}
-        <div 
-          className="flex items-center gap-4 cursor-pointer relative select-none group"
-          onClick={() => setCategoriesOpen(!categoriesOpen)}
-        >
-          
-          <span className="text-[11px] font-black uppercase tracking-[0.2em] dark:text-white">Menú</span>
+        <div className="flex items-center gap-6">
+            {/* Logo in Navbar (Mobile Visible) */}
+            <Link to="/" className="flex items-center gap-3 group cursor-pointer lg:hidden">
+              <div className="text-left leading-tight">
+                <h1 className="text-xl font-black tracking-tighter dark:text-white uppercase">ceteos<span className="text-gold-500">.</span>MX</h1>
+                <p className="text-[7px] font-bold tracking-[0.35em] text-gray-500 dark:text-gray-400 uppercase">la compañía más conectada</p>
+              </div>
+            </Link>
+
+            {/* Categories Trigger */}
+            <div 
+              className="flex items-center gap-4 cursor-pointer relative select-none group border-l border-white/10 pl-6 md:border-none md:pl-0"
+              onClick={() => setCategoriesOpen(!categoriesOpen)}
+            >
+              
+              <span className="text-[11px] font-black uppercase tracking-[0.2em] dark:text-white">Menú</span>
           
           {/* Dropdown */}
           {categoriesOpen && (
@@ -167,6 +191,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContact, mobileMen
               </ul>
             </div>
           )}
+        </div>
         </div>
 
         {/* Desktop Nav */}
@@ -197,20 +222,20 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContact, mobileMen
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-[200] lg:hidden">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-xl" onClick={() => setMobileMenuOpen(false)}></div>
-          <div className="absolute top-0 right-0 bottom-0 w-[320px] philips-glass shadow-2xl flex flex-col slide-in-left border-l border-white/20 backdrop-blur-3xl">
+          <div className="absolute top-0 right-0 bottom-0 w-[300px] sm:w-[320px] philips-glass shadow-2xl flex flex-col slide-in-right border-l border-white/20 backdrop-blur-3xl">
              <div className="flex items-center justify-between p-8 border-b border-white/10">
                <span className="font-black tracking-[0.3em] text-gray-900 dark:text-white uppercase text-sm">Navegación</span>
                <button onClick={() => setMobileMenuOpen(false)} className="w-12 h-12 flex items-center justify-center rounded-xl glass-interactive">
                  <i className="fa-solid fa-xmark text-lg"></i>
                </button>
              </div>
-             <div className="overflow-y-auto flex-1 py-10">
+             <div className="overflow-y-auto flex-1 py-4">
                 <nav className="flex flex-col text-[11px] font-black uppercase tracking-[0.3em] text-gray-700 dark:text-gray-300">
                   {navLinks.map((link) => (
                     <Link 
                       key={link.href} 
                       to={link.href} 
-                      className={`px-10 py-6 hover:text-gold-500 hover:bg-white/10 transition-all ${pathname === link.href ? 'text-gold-500 bg-white/5' : ''}`}
+                      className={`px-10 py-6 active:text-gold-500 active:bg-white/5 transition-all ${pathname === link.href ? 'text-gold-500 bg-white/5 border-l-4 border-gold-500' : ''}`}
                       onClick={() => handleMobileLinkClick(link.href)}
                     >
                       {link.name}
@@ -224,17 +249,17 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContact, mobileMen
                     <Link 
                       key={cat.id} 
                       to={cat.href || "#"} 
-                      className="px-10 py-4 hover:text-gold-500 hover:bg-white/10 transition-all flex items-center gap-4"
+                      className="px-10 py-4 active:text-gold-500 active:bg-white/10 transition-all flex items-center gap-4 text-gray-700 dark:text-gray-300"
                       onClick={() => handleMobileLinkClick(cat.href || "#")}
                     >
-                      {cat.iconClass && <i className={`${cat.iconClass} w-5 text-center text-gold-500`}></i>}
+                      {cat.iconClass && <i className={`${cat.iconClass} w-5 text-center text-gray-400 group-active:text-gold-500`}></i>}
                       {cat.name}
                     </Link>
                   ))}
 
                   <button 
                     onClick={() => { setMobileMenuOpen(false); if (onOpenContact) onOpenContact(); }}
-                    className="mx-10 my-6 bg-gold-500 text-white text-[10px] font-black px-8 py-4 rounded-2xl uppercase tracking-[0.2em] hover:bg-gold-600 shadow-xl shadow-gold-500/30 transition-all text-center"
+                    className="mx-10 my-6 bg-gold-500 text-white text-[10px] font-black px-8 py-4 rounded-2xl uppercase tracking-[0.2em] active:bg-gold-600 shadow-xl shadow-gold-500/30 transition-all text-center"
                   >
                     Cotizar Proyecto
                   </button>
@@ -249,12 +274,12 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContact, mobileMen
 
 export const Footer: React.FC = () => {
   return (
-    <footer id="contact-footer" className="bg-white/5 dark:bg-black/40 backdrop-blur-3xl pt-24 pb-12 border-t border-white/10 text-sm text-gray-600 dark:text-gray-400 relative z-50">
+    <footer id="contact-footer" className="bg-white/5 dark:bg-black/40 backdrop-blur-3xl pt-16 md:pt-24 pb-12 border-t border-white/10 text-sm text-gray-600 dark:text-gray-400 relative z-50">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16 mb-12 md:mb-20">
           
           <div>
-            <h4 className="font-black text-black dark:text-white uppercase mb-8 tracking-[0.3em] text-[10px]">Filosofía</h4>
+            <h4 className="font-black text-black dark:text-white uppercase mb-6 md:mb-8 tracking-[0.3em] text-[10px]">Filosofía</h4>
             <p className="leading-relaxed mb-8 text-sm font-medium">
               Especialistas en la creación de ecosistemas digitales de alto rendimiento. Transformamos la complejidad técnica en experiencias fluidas.
             </p>
@@ -268,8 +293,8 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="font-black text-black dark:text-white uppercase mb-8 tracking-[0.3em] text-[10px]">Recursos</h4>
-            <ul className="space-y-5 text-[10px] font-bold tracking-widest uppercase">
+            <h4 className="font-black text-black dark:text-white uppercase mb-6 md:mb-8 tracking-[0.3em] text-[10px]">Recursos</h4>
+            <ul className="space-y-4 md:space-y-5 text-[10px] font-bold tracking-widest uppercase">
               <li><Link to="/faq" className="hover:text-gold-500 transition-colors">Centro de Ayuda</Link></li>
               <li><Link to="/docs" className="hover:text-gold-500 transition-colors">Documentación</Link></li>
               <li><Link to="/status" className="hover:text-gold-500 transition-colors">API Status</Link></li>
@@ -277,8 +302,8 @@ export const Footer: React.FC = () => {
           </div>
 
            <div>
-            <h4 className="font-black text-black dark:text-white uppercase mb-8 tracking-[0.3em] text-[10px]">Compañía</h4>
-            <ul className="space-y-5 text-[10px] font-bold tracking-widest uppercase">
+            <h4 className="font-black text-black dark:text-white uppercase mb-6 md:mb-8 tracking-[0.3em] text-[10px]">Compañía</h4>
+            <ul className="space-y-4 md:space-y-5 text-[10px] font-bold tracking-widest uppercase">
               <li><Link to="/equipo" className="hover:text-gold-500 transition-colors">Nuestros Expertos</Link></li>
               <li><Link to="/casos-exito" className="hover:text-gold-500 transition-colors">Casos de Éxito</Link></li>
               <li><Link to="/laboratorio" className="hover:text-gold-500 transition-colors">Laboratorio</Link></li>
@@ -286,7 +311,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="font-black text-black dark:text-white uppercase mb-8 tracking-[0.3em] text-[10px]">Newsletter</h4>
+            <h4 className="font-black text-black dark:text-white uppercase mb-6 md:mb-8 tracking-[0.3em] text-[10px]">Newsletter</h4>
             <p className="text-[10px] mb-6 font-bold uppercase tracking-widest">Suscríbete para actualizaciones exclusivas.</p>
             <div className="flex glass-interactive p-1.5 rounded-2xl border border-white/10">
               <input type="text" placeholder="Tu email" className="bg-transparent flex-1 px-4 outline-none text-xs" />
@@ -298,7 +323,7 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        <div className="border-t border-white/10 pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="border-t border-white/10 pt-10 md:pt-12 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8 text-center md:text-left">
           
           <div className="flex items-center gap-4">
             <div className="bg-gold-500 text-white p-2.5 rounded-xl w-10 h-10 flex items-center justify-center shadow-lg shadow-gold-500/30">
@@ -307,13 +332,13 @@ export const Footer: React.FC = () => {
             <span className="font-black text-xl uppercase tracking-[0.3em] text-black dark:text-white">CETEOS</span>
           </div>
 
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">
+          <p className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">
             © 2026 CETEOS TECHNOLOGIES. ALL RIGHTS RESERVED.
           </p>
 
           <button 
              onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-             className="w-14 h-14 flex items-center justify-center glass-interactive rounded-2xl hover:bg-gold-500 hover:text-white transition-all shadow-2xl active:scale-90"
+             className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center glass-interactive rounded-2xl hover:bg-gold-500 hover:text-white transition-all shadow-2xl active:scale-90"
           >
             <i className="fa-solid fa-chevron-up"></i>
           </button>
@@ -329,11 +354,24 @@ export const FloatingWhatsApp: React.FC<{ isHidden?: boolean }> = ({ isHidden })
       href="https://wa.me/1234567890"
       target="_blank"
       rel="noopener noreferrer"
-      className={`fixed bottom-10 right-10 z-[150] flex items-center gap-4 bg-[#25D366] text-white px-8 py-5 rounded-[2rem] shadow-2xl hover:bg-[#20bd5a] hover:-translate-y-3 transition-all duration-700 group ${isHidden ? 'opacity-0 scale-0 pointer-events-none translate-y-20' : 'opacity-100 scale-100 translate-y-0 animate-bounce-subtle'}`}
+      className={`fixed bottom-8 right-8 z-[150] flex items-center justify-center w-16 h-16 rounded-full bg-[#25D366]/90 backdrop-blur-md shadow-[0_0_20px_rgba(37,211,102,0.4)] text-white hover:bg-[#20bd5a] hover:scale-110 transition-all duration-300 group ${isHidden ? 'opacity-0 scale-0 pointer-events-none translate-y-20' : 'opacity-100 scale-100 translate-y-0'}`}
     >
-      <div className="absolute inset-0 rounded-[2rem] bg-[#25D366] animate-ping opacity-20 group-hover:hidden"></div>
-      <i className="fa-brands fa-whatsapp text-3xl group-hover:rotate-12 transition-transform relative z-10"></i>
-      <span className="font-black text-[11px] uppercase tracking-[0.2em] relative z-10">Solicitar cotización</span>
+      {/* Pulse Effect */}
+      <div className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20 pointer-events-none duration-[2000ms]"></div>
+      
+      {/* Icon */}
+      <i className="fa-brands fa-whatsapp text-3xl drop-shadow-md"></i>
+
+      {/* Notification Badge */}
+      <div className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full border-2 border-white dark:border-black flex items-center justify-center">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+      </div>
+
+      {/* Hover Tooltip/Label */}
+      <div className="absolute right-full mr-4 bg-white/10 backdrop-blur-md border border-white/20 text-black dark:text-white px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300 whitespace-nowrap shadow-xl">
+        Solicitar cotización
+      </div>
     </a>
   );
 };
@@ -361,7 +399,7 @@ export const SiteLayout: React.FC<{ children: React.ReactNode; darkMode: boolean
       <TopBar isDarkMode={darkMode} toggleTheme={toggleTheme} />
       <MainHeader />
       <Navigation onOpenContact={toggleModal} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
-      <main className="flex-grow relative z-10 py-10">
+      <main id="main-content" className="flex-grow relative z-10 py-4">
         {children}
       </main>
       <Footer />

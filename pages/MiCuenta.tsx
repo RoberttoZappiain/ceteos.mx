@@ -5,7 +5,7 @@ export const MiCuenta: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
 
   return (
-    <div className="container mx-auto px-4 md:px-8 py-16 relative z-10 min-h-[80vh] flex flex-col justify-center">
+    <div className="container mx-auto px-4 md:px-8 py-4 relative z-10 min-h-[80vh] flex flex-col justify-center">
       
       <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-24 max-w-6xl mx-auto w-full">
         

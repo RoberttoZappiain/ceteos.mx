@@ -14,7 +14,7 @@ export const Infraestructura: React.FC = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 md:px-8 py-16 relative z-10">
+    <div className="container mx-auto px-4 md:px-8 py-4 relative z-10">
       
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-8 animate-fade-in">
@@ -57,7 +57,7 @@ export const Infraestructura: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative">
                {/* Before Card */}
                <div className="relative group/card overflow-hidden rounded-2xl border border-gold-500/20 shadow-lg">
-                  <div className="absolute top-4 left-4 z-20 bg-black/60 backdrop-blur-md text-white px-4 py-1.5 rounded-lg font-mono text-sm border border-white/10 uppercase tracking-wider">
+                  <div className="absolute top-4 left-4 z-20 bg-black/60 backdrop-blur-md text-white px-4 py-1.5 rounded-lg font-sans text-sm border border-white/10 uppercase tracking-wider">
                      <i className="fa-solid fa-triangle-exclamation text-orange-500 mr-2"></i> Antes
                   </div>
                   <img 
@@ -75,7 +75,7 @@ export const Infraestructura: React.FC = () => {
 
                {/* After Card */}
                <div className="relative group/card overflow-hidden rounded-2xl border border-green-500/20 shadow-2xl shadow-green-500/10">
-                  <div className="absolute top-4 left-4 z-20 bg-green-500 text-white px-4 py-1.5 rounded-lg font-mono text-sm shadow-lg uppercase tracking-wider font-bold">
+                  <div className="absolute top-4 left-4 z-20 bg-green-500 text-white px-4 py-1.5 rounded-lg font-sans text-sm shadow-lg uppercase tracking-wider font-bold">
                      <i className="fa-solid fa-check-circle mr-2"></i> Después
                   </div>
                   <img 

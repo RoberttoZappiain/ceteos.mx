@@ -4,7 +4,7 @@ import { ContactForm } from '../components/ContactForm';
 
 export const SoporteTecnico: React.FC = () => {
   return (
-    <div className="container mx-auto px-4 md:px-8 py-16 relative z-10">
+    <div className="container mx-auto px-4 md:px-8 py-4 relative z-10">
       
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-8 animate-fade-in">
@@ -126,7 +126,7 @@ export const SoporteTecnico: React.FC = () => {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                      </span>
-                     <span className="text-green-500 font-mono text-xs uppercase tracking-widest">Sistemas Operativos</span>
+                     <span className="text-green-500 font-sans text-xs uppercase tracking-widest">Sistemas Operativos</span>
                   </div>
                   <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                      Monitoreo Proactivo

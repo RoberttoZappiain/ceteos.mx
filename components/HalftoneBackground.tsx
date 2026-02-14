@@ -12,33 +12,23 @@ export const HalftoneBackground: React.FC<HalftoneBackgroundProps> = ({
   accentColor = '212, 175, 55' // Tailwind gold-500
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const particlesRef = useRef<any[]>([]);
+  const animationFrameRef = useRef<number>();
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (canvasRef.current) {
-        setDimensions({ width: window.innerWidth, height: window.innerHeight });
-        canvasRef.current.width = window.innerWidth;
-        canvasRef.current.height = window.innerHeight;
-      }
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
+  // Initialize particles
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    
+    // Set initial size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    let animationFrameId: number;
-    const particles: any[] = [];
     const particleCount = intensity === 'subtle' ? 40 : intensity === 'bold' ? 120 : 80;
+    particlesRef.current = [];
 
     for (let i = 0; i < particleCount; i++) {
-      particles.push({
+      particlesRef.current.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 0.5,
@@ -47,13 +37,34 @@ export const HalftoneBackground: React.FC<HalftoneBackgroundProps> = ({
         pulse: Math.random() * Math.PI
       });
     }
+  }, [intensity]);
+
+  // Handle Resize without resetting particles
+  useEffect(() => {
+    const handleResize = () => {
+      if (canvasRef.current) {
+        canvasRef.current.width = window.innerWidth;
+        canvasRef.current.height = window.innerHeight;
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Animation Loop
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const color = darkMode ? '255, 255, 255' : '0, 0, 0';
       const opacityBase = darkMode ? 0.2 : 0.1;
 
-      particles.forEach((p, i) => {
+      particlesRef.current.forEach((p, i) => {
         p.x += p.vx;
         p.y += p.vy;
         p.pulse += 0.02;
@@ -68,8 +79,8 @@ export const HalftoneBackground: React.FC<HalftoneBackgroundProps> = ({
         ctx.fill();
 
         // Draw connections
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
+        for (let j = i + 1; j < particlesRef.current.length; j++) {
+          const p2 = particlesRef.current[j];
           const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
           if (dist < 150) {
             ctx.strokeStyle = `rgba(${color}, ${(1 - dist / 150) * opacityBase * 0.5})`;
@@ -82,12 +93,16 @@ export const HalftoneBackground: React.FC<HalftoneBackgroundProps> = ({
         }
       });
 
-      animationFrameId = requestAnimationFrame(draw);
+      animationFrameRef.current = requestAnimationFrame(draw);
     };
 
     draw();
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [dimensions, darkMode, intensity]);
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [darkMode]); // Only re-bind loop if color mode changes
 
   const gridColor = darkMode ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.02)';
   

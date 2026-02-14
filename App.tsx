@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { SiteLayout } from './components/Layout';
 import { 
   HeroSection, 
@@ -23,6 +23,51 @@ import { products } from './data';
 import { SectionHeader } from './components/Common';
 import { PageLoader } from './components/PageLoader';
 import { ContactForm } from './components/ContactForm';
+
+// Scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Disable browser's default scroll restoration to prevent conflicts
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    // Small delay ensures DOM layout is stable before scrolling
+    const timer = setTimeout(() => {
+      const isMobile = window.innerWidth < 1024;
+      const navElement = document.getElementById('main-navigation');
+
+      if (isMobile) {
+        const mainElement = document.getElementById('main-content');
+        const navElement = document.getElementById('main-navigation');
+        
+        if (mainElement && navElement) {
+          // Calculate the height of the sticky navigation to offset the scroll
+          const navHeight = navElement.offsetHeight || 64; 
+          // Position at the start of main content, with the menu just above it
+          const scrollPosition = mainElement.offsetTop - navHeight;
+          
+          window.scrollTo({
+            top: scrollPosition,
+            behavior: 'instant'
+          });
+        }
+      } else {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'instant'
+        });
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
+
+  return null;
+};
 
 // Home Page Component
 const HomePage: React.FC = () => {
@@ -50,7 +95,7 @@ const HomePage: React.FC = () => {
       <FlashSaleBanner />
       <CarouselRow />
       
-      <div className="container mx-auto px-8 mb-8">
+      <div className="container mx-auto px-4 md:px-8 mb-8">
           <div className="text-center font-bold text-sm tracking-widest uppercase border-b border-gray-100 dark:border-gray-800 pb-4 mb-8 text-gray-800 dark:text-white">
             Comprar Por Marca
           </div>
@@ -141,6 +186,7 @@ const App: React.FC = () => {
     <>
       <PageLoader isLoading={isLoading} />
       <Router>
+        <ScrollToTop />
         <SiteLayout darkMode={darkMode} toggleTheme={toggleTheme}>
           <Routes>
             <Route path="/" element={<HomePage />} />

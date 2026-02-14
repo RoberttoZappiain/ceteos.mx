@@ -74,53 +74,53 @@ export const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="relative z-10 max-w-5xl mx-auto mb-20">
+    <div className="relative z-10 max-w-5xl mx-auto mb-16 md:mb-20 px-4 md:px-0 overflow-hidden">
       {/* Background Blobs for Form */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-gold-500/10 to-blue-500/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
 
-      <div className="bg-white/80 dark:bg-black/40 backdrop-blur-2xl border border-gray-200 dark:border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl overflow-hidden relative group">
+      <div className="bg-white/80 dark:bg-black/40 backdrop-blur-2xl border border-gray-200 dark:border-white/10 rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-12 shadow-2xl overflow-hidden relative group">
         
         {/* Decorative Top Line */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold-500 via-purple-500 to-blue-500 opacity-80"></div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           
           {/* Form Header & Info */}
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                 Inicia tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-500 to-purple-600">Transformación</span>
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-400 text-sm md:text-lg leading-relaxed">
                 Cuéntanos sobre tu proyecto. Nuestros ingenieros analizarán tus requerimientos para ofrecerte una propuesta técnica a medida.
               </p>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
                <div className="flex items-center gap-4 text-gray-700 dark:text-gray-300">
-                  <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-gold-500 border border-gray-200 dark:border-white/10">
-                    <i className="fa-solid fa-envelope"></i>
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-gold-500 border border-gray-200 dark:border-white/10">
+                    <i className="fa-solid fa-envelope text-sm md:text-base"></i>
                   </div>
                   <div>
-                    <span className="block text-xs uppercase tracking-wider opacity-70">Email Directo</span>
-                    <span className="text-lg font-medium">{EMAIL_RECIPIENT}</span>
+                    <span className="block text-[10px] md:text-xs uppercase tracking-wider opacity-70">Email Directo</span>
+                    <span className="text-base md:text-lg font-medium break-all">{EMAIL_RECIPIENT}</span>
                   </div>
                </div>
                <div className="flex items-center gap-4 text-gray-700 dark:text-gray-300">
-                  <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-blue-500 border border-gray-200 dark:border-white/10">
-                    <i className="fa-solid fa-shield-halved"></i>
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-blue-500 border border-gray-200 dark:border-white/10">
+                    <i className="fa-solid fa-shield-halved text-sm md:text-base"></i>
                   </div>
                   <div>
-                    <span className="block text-xs uppercase tracking-wider opacity-70">Garantía</span>
-                    <span className="text-lg font-medium">NDA & Confidencialidad</span>
+                    <span className="block text-[10px] md:text-xs uppercase tracking-wider opacity-70">Garantía</span>
+                    <span className="text-base md:text-lg font-medium">NDA & Confidencialidad</span>
                   </div>
                </div>
             </div>
           </div>
 
           {/* The Form */}
-          <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form className="space-y-5 md:space-y-6 relative z-10" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
               <div className="space-y-2">
                 <label className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Nombre</label>
                 <input 
@@ -130,7 +130,7 @@ export const ContactForm: React.FC = () => {
                   onChange={handleChange}
                   placeholder="Tu nombre completo"
                   required
-                  className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all"
+                  className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all text-sm"
                 />
               </div>
               <div className="space-y-2">
@@ -141,7 +141,7 @@ export const ContactForm: React.FC = () => {
                   value={formData.company}
                   onChange={handleChange}
                   placeholder="Nombre de tu empresa"
-                  className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all"
+                  className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all text-sm"
                 />
               </div>
             </div>
@@ -155,11 +155,11 @@ export const ContactForm: React.FC = () => {
                 onChange={handleChange}
                 placeholder="ejemplo@empresa.com"
                 required
-                className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all"
+                className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all text-sm"
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
               <div className="space-y-2">
                 <label className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Tipo de Proyecto</label>
                 <div className="relative">
@@ -167,7 +167,7 @@ export const ContactForm: React.FC = () => {
                     name="projectType"
                     value={formData.projectType}
                     onChange={handleChange}
-                    className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all cursor-pointer"
+                    className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all cursor-pointer text-sm"
                   >
                     <option>Desarrollo Web</option>
                     <option>App Móvil</option>
@@ -187,7 +187,7 @@ export const ContactForm: React.FC = () => {
                     name="budget"
                     value={formData.budget}
                     onChange={handleChange}
-                    className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all cursor-pointer"
+                    className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all cursor-pointer text-sm"
                   >
                     <option>Menos de $1k MXM</option>
                     <option>$5k - $15k MXM</option>
@@ -208,7 +208,7 @@ export const ContactForm: React.FC = () => {
                 value={formData.details}
                 onChange={handleChange}
                 placeholder="Describe brevemente tus objetivos..."
-                className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all resize-none"
+                className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all resize-none text-sm"
               ></textarea>
             </div>
 

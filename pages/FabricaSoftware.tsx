@@ -2,6 +2,8 @@ import React from 'react';
 import { SectionHeader, ProductCard } from '../components/Common';
 import { ContactForm } from '../components/ContactForm';
 import { categories, products } from '../data';
+import { StudioDisplaySlider } from '../components/StudioDisplaySlider';
+import { ProjectCarousel } from '../components/ProjectCarousel';
 
 export const FabricaSoftware: React.FC = () => {
   // Filter software-related categories and products
@@ -14,7 +16,7 @@ export const FabricaSoftware: React.FC = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 md:px-8 py-16 relative z-10">
+    <div className="container mx-auto px-4 md:px-8 py-4 relative z-10">
       
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-8 animate-fade-in">
@@ -40,33 +42,29 @@ export const FabricaSoftware: React.FC = () => {
       </div>
      
       {/* Liquid Glass Ecosystem Section */}
-      <div className="mb-32 space-y-32 relative overflow-hidden p-4 -m-4">
+      <div className="mb-32 relative overflow-hidden p-4 -m-4">
         
         {/* Ambient Liquid Backgrounds - Adapted for Light/Dark */}
-        <div className="absolute top-0 left-[-20%] w-[600px] h-[600px] bg-gold-500/10 dark:bg-gold-500/20 rounded-full blur-[120px] pointer-events-none animate-pulse mix-blend-multiply dark:mix-blend-screen"></div>
+        <div className="absolute top-0 left-[-20%] w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none animate-pulse mix-blend-multiply dark:mix-blend-screen"></div>
         <div className="absolute bottom-0 right-[-20%] w-[600px] h-[600px] bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[120px] pointer-events-none animate-pulse mix-blend-multiply dark:mix-blend-screen" style={{ animationDelay: '2s' }}></div>
 
         {/* Feature Block 1: The Core Structure */}
         <div className="relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* Video Module (Left, spans 7 cols) */}
-            <div className="lg:col-span-7 relative group perspective-1000">
-              <div className="absolute -inset-1 bg-gradient-to-r from-gold-600/50 to-purple-600/50 rounded-[2.5rem] blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-              <div className="relative rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/10 shadow-2xl bg-white/50 dark:bg-black/40 backdrop-blur-md transform transition-transform duration-500 group-hover:rotate-y-1">
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/40 dark:from-black/60 via-transparent to-transparent z-10"></div>
-                <video 
-                  className="w-full h-full object-cover aspect-[16/10] opacity-90 group-hover:scale-105 transition-transform duration-700"
-                  autoPlay 
-                  muted 
-                  playsInline
-                  src="/media-clear/video1.mp4"
-                />
+            {/* Video Module (Left, spans 5 cols) REPLACED WITH SLIDER */}
+            <div className="lg:col-span-5 relative group perspective-1000">
+               {/* Background Glow Effect - Made smaller and tighter */}
+              <div className="absolute inset-2 bg-gradient-to-r from-gold-600/30 to-purple-600/30 rounded-[2.5rem] blur-xl opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
+              
+              {/* Slider Container - Removed padding to collapse height */}
+              <div className="relative rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/10 shadow-lg bg-white/30 dark:bg-black/20 backdrop-blur-md transform transition-transform duration-500 group-hover:rotate-y-1 flex items-center justify-center">
+                <StudioDisplaySlider />
               </div>
             </div>
 
-            {/* Content Module (Right, spans 5 cols, overlapping effect) */}
-            <div className="lg:col-span-5 lg:-ml-12 relative z-20">
+            {/* Content Module (Right, spans 7 cols) */}
+            <div className="lg:col-span-7 relative z-20">
               <div className="bg-white/80 dark:bg-black/40 backdrop-blur-xl border border-gray-200 dark:border-white/10 rounded-[2rem] p-8 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] hover:shadow-xl transition-shadow duration-500">
                 <div className="mb-6">
                   <h3 className="text-gold-600 dark:text-gold-500 text-sm tracking-[0.2em] mb-2 uppercase font-bold">Arquitectura Web</h3>
@@ -164,23 +162,7 @@ export const FabricaSoftware: React.FC = () => {
             <div className="lg:col-span-7 lg:order-2 order-1 relative group perspective-1000">
               <div className="absolute -inset-1 bg-gradient-to-l from-blue-600/50 to-cyan-600/50 rounded-[2.5rem] blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
               <div className="relative rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/10 shadow-2xl bg-white/50 dark:bg-black/40 backdrop-blur-md transform transition-transform duration-500 group-hover:-rotate-y-1">
-                 <div className="absolute inset-0 bg-gradient-to-bl from-white/40 dark:from-black/60 via-transparent to-transparent z-10"></div>
-                <video 
-                  className="w-full h-full object-cover aspect-[16/10] opacity-90 group-hover:scale-105 transition-transform duration-700"
-                  autoPlay 
-                  muted 
-                  playsInline
-                  src="/media-clear/video2.mp4"
-                />
-
-                 {/* Tech Overlay Elements */}
-                 <div className="absolute top-0 right-0 p-8 z-20 opacity-50">
-                    <div className="flex gap-2">
-                        <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                        <div className="w-2 h-2 rounded-full bg-gray-300 dark:bg-white/20"></div>
-                        <div className="w-2 h-2 rounded-full bg-gray-300 dark:bg-white/20"></div>
-                    </div>
-                 </div>
+                 <ProjectCarousel />
               </div>
             </div>
 
