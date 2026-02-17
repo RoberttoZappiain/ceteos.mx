@@ -29,6 +29,9 @@ export const StudioDisplaySlider: React.FC = () => {
   const BASE_WIDTH = MAC_WIDTH + OVERLAP_OFFSET + 50; // Add some padding
   const MAX_SCALE = 0.8; 
 
+  const SLIDE_INTERVAL = 4000; // 4 seconds
+  const autoSlideRef = useRef<NodeJS.Timeout>();
+
   useEffect(() => {
     const updateSize = () => {
       if (containerRef.current) {
@@ -43,10 +46,36 @@ export const StudioDisplaySlider: React.FC = () => {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
+  const resetAutoSlide = () => {
+    if (autoSlideRef.current) {
+      clearInterval(autoSlideRef.current);
+    }
+    autoSlideRef.current = setInterval(handleMacNext, SLIDE_INTERVAL);
+  };
+
+  useEffect(() => {
+    resetAutoSlide();
+    return () => {
+      if (autoSlideRef.current) {
+        clearInterval(autoSlideRef.current);
+      }
+    };
+  }, []);
+
   // Mac Controls
-  const handleMacNext = () => setMacIndex((prev) => (prev + 1) % SLIDE_IMAGES.length);
-  const handleMacPrev = () => setMacIndex((prev) => (prev - 1 + SLIDE_IMAGES.length) % SLIDE_IMAGES.length);
-  const handleMacDotClick = (index: number) => setMacIndex(index);
+  const handleMacNext = () => {
+    setMacIndex((prev) => (prev + 1) % SLIDE_IMAGES.length);
+  };
+  
+  const handleMacPrev = () => {
+    setMacIndex((prev) => (prev - 1 + SLIDE_IMAGES.length) % SLIDE_IMAGES.length);
+    resetAutoSlide();
+  };
+  
+  const handleMacDotClick = (index: number) => {
+    setMacIndex(index);
+    resetAutoSlide();
+  };
 
   // iPhone Controls
   const handlePhoneClick = () => setIphoneIndex((prev) => (prev + 1) % SLIDE_IMAGES.length);
@@ -78,7 +107,7 @@ export const StudioDisplaySlider: React.FC = () => {
                           key={index}
                           src={src}
                           alt={`Mac Slide ${index + 1}`}
-                          className={`absolute top-0 left-0 w-full h-full object-fill transition-opacity duration-500 ${
+                          className={`absolute top-0 left-0 w-full h-full object-fill transition-opacity duration-1000 ${
                               index === macIndex ? 'opacity-100' : 'opacity-0'
                           }`}
                       />
@@ -90,29 +119,29 @@ export const StudioDisplaySlider: React.FC = () => {
                   {/* Controls - Arrows */}
                   <button 
                       onClick={handleMacPrev}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm"
+                      className="absolute left-6 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm focus:outline-none"
                   >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-10 h-10">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                       </svg>
                   </button>
                   <button 
-                      onClick={handleMacNext}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm"
+                      onClick={() => { handleMacNext(); resetAutoSlide(); }}
+                      className="absolute right-6 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm focus:outline-none"
                   >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-10 h-10">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                       </svg>
                   </button>
 
                   {/* Controls - Dots */}
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex space-x-4 bg-black/40 px-5 py-3 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {SLIDE_IMAGES.map((_, idx) => (
                           <button
                               key={idx}
                               onClick={() => handleMacDotClick(idx)}
-                              className={`w-2 h-2 rounded-full transition-all ${
-                                  idx === macIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/80'
+                              className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                                  idx === macIndex ? 'bg-white scale-150' : 'bg-white/50 hover:bg-white/80'
                               }`}
                           />
                       ))}

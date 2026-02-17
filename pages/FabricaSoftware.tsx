@@ -4,6 +4,7 @@ import { ContactForm } from '../components/ContactForm';
 import { categories, products } from '../data';
 import { StudioDisplaySlider } from '../components/StudioDisplaySlider';
 import { ProjectCarousel } from '../components/ProjectCarousel';
+import { AdvertisingPlans } from '../components/AdvertisingPlans';
 
 export const FabricaSoftware: React.FC = () => {
   // Filter software-related categories and products
@@ -42,7 +43,7 @@ export const FabricaSoftware: React.FC = () => {
       </div>
      
       {/* Liquid Glass Ecosystem Section */}
-      <div className="mb-32 relative overflow-hidden p-4 -m-4">
+      <div className="mb-4 relative overflow-hidden p-4 -m-4">
         
         {/* Ambient Liquid Backgrounds - Adapted for Light/Dark */}
         <div className="absolute top-0 left-[-20%] w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none animate-pulse mix-blend-multiply dark:mix-blend-screen"></div>
@@ -137,16 +138,21 @@ export const FabricaSoftware: React.FC = () => {
                 </div>
 
                 <div className="space-y-3">
-                  {[
-                    { text: "diseño moderno y funcional", icon: "fa-swatchbook" },
-                    { text: "diseño responsive (celular y tabletas)", icon: "fa-mobile-screen-button" },
-                    { text: "optimization de carga", icon: "fa-bolt-lightning" },
-                    { text: "integracion con redes sociales", icon: "fa-share-nodes" },
-                    { text: "hosting mensual", icon: "fa-server" },
-                    { text: "dominio incluido", icon: "fa-globe" },
-                    { text: "30 días de garantía y mantenimiento", icon: "fa-shield" },
-                    { text: "1 campaña publicitaria", icon: "fa-rectangle-ad" }
-                  ].map((item, idx) => (
+                                    {[
+                                      { text: "diseño moderno y funcional", icon: "fa-swatchbook" },
+                                      { text: "diseño responsive (celular y tabletas)", icon: "fa-mobile-screen-button" },
+                                      { text: "optimization de carga", icon: "fa-bolt-lightning" },
+                                      { text: "integracion con redes sociales", icon: "fa-share-nodes" },
+                                      { text: "hosting mensual", icon: "fa-server" },
+                                      { text: "dominio incluido", icon: "fa-globe" },
+                                      { text: "Acceso a repositorio en Github", icon: "fa-brands fa-github" },
+                                      { text: "Protección contra ataques con Cloudflare", icon: "fa-brands fa-cloudflare" },
+                                      { text: "30 días de garantía y mantenimiento", icon: "fa-shield-halved" },
+                                      { text: "1 campaña publicitaria", icon: "fa-rectangle-ad" },
+                                      { text: "Analiticas y SEO by Google / Reporte rendimiento", icon: "fa-chart-line" },
+                                      { text: "manual de usuario", icon: "fa-book-open" },
+                                      { text: "*credenciales de Acceso*", icon: "fa-key"} 
+                                    ].map((item, idx) => (
                     <div key={idx} className="flex items-center gap-4 p-3 rounded-xl bg-gray-5 dark:bg-white/5 border border-gray-200 dark:border-white/5 hover:bg-blue-50 dark:hover:bg-blue-500/10 transition-all group">
                       <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-500 border border-blue-500/20 shadow-sm group-hover:scale-110 transition-transform">
                         <i className={`fa-solid ${item.icon}`}></i>
@@ -170,6 +176,8 @@ export const FabricaSoftware: React.FC = () => {
         </div>
 
       </div>
+
+      <AdvertisingPlans />
 
       {/* Our Software Products */}
       <div className="mb-20">

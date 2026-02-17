@@ -53,7 +53,7 @@ export const MainHeader: React.FC = () => {
         <div className="flex items-center gap-3 group cursor-pointer">
            
            <div className="text-center lg:text-left">
-             <h1 className="text-3xl font-black tracking-tighter dark:text-white uppercase">ceteos<span className="text-gold-500">.</span>MX</h1>
+             <h1 className="text-3xl font-black tracking-tighter dark:text-white uppercase">ceteos<span className="text-gold-500">.</span>lat</h1>
              <p className="text-[9px] font-bold tracking-[0.35em] text-gray-500 dark:text-gray-400 uppercase mt-1">la compañía más conectada</p>
            </div>
         </div>
