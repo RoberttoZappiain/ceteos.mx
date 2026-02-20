@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { SEOHead } from './SEOHead';
 import { categories, products, brands, blogPosts } from '../data';
 import { ProductCard, PromoCard, SectionHeader, SidebarBanner } from './Common';
 
@@ -7,6 +8,11 @@ import { ProductCard, PromoCard, SectionHeader, SidebarBanner } from './Common';
 export const HeroSection: React.FC = () => {
   return (
     <div className="container mx-auto px-4 md:px-8 mt-0 mb-12 md:mb-16 relative z-10">
+      <SEOHead 
+        title="ceteos.mx | La compañia más conectada"
+        description="Soluciones tecnológicas integrales: Desarrollo de Software, Infraestructura TI, Soporte Técnico y Licenciamiento. Potencia tu negocio con Ceteos."
+        keywords="desarrollo web, aplicaciones moviles, infraestructura ti, soporte tecnico, licencias software, ceteos"
+      />
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0); }
@@ -36,18 +42,24 @@ export const HeroSection: React.FC = () => {
               <div className="relative w-full h-full flex items-center justify-end">
                  {/* Desktop Image */}
                  <img 
-                    src="/media-clear/proyects/pos-ecomerce.webp" 
+                    src="/media-clear/proyects/pos-ecomerce-system-by-ceteos.webp" 
                     className="absolute right-[-10%] md:right-[-1%]  w-[80%] object-contain opacity-30 dark:opacity-50 blur-[2px] md:blur-0 rounded-xl shadow-2xl"
                     style={{ animation: 'drift 10s ease-in-out infinite alternate' }}
-                    alt="Ecommerce System"
+                    alt="Ecommerce System by ceteos"
+                    fetchPriority="high"
+                    width="1000"
+                    height="800"
                  />
                  
                  {/* Mobile Image */}
                  <img 
-                    src="/media-clear/proyects/more/rifas-bahia.png" 
+                    src="/media-clear/proyects/more/rifas-bahia-app-by-ceteos.png" 
                     className="absolute right-[-10%] md:right-[55%] bottom-[-5%] w-[60%] md:w-[50%] object-contain drop-shadow-2xl z-20"
                     style={{ animation: 'float 6s ease-in-out infinite' }}
-                    alt="Mobile App"
+                    alt="Mobile App by ceteos"
+                    loading="lazy"
+                    width="400"
+                    height="800"
                  />
               </div>
             </div>
@@ -116,7 +128,7 @@ export const PromoGrid: React.FC = () => {
         <PromoCard 
           title="Nueva Llegada" 
           subtitle="Licencias Cloud" 
-          image="/media-clear/1-1536x1536.png" 
+          image="/media-clear/adobe-creative-cloud-licencias-suite-adobe-by-ceteos.png" 
         />
          <PromoCard 
           title="Descuento" 
@@ -191,7 +203,7 @@ export const FlashSaleBanner: React.FC = () => {
       
       {/* Background Image Overlay */}
       <div className="absolute inset-0 opacity-20 z-[1]">
-        <img src="/media-clear/Diseno-sin-titulo-1920x550.png" alt="Background" className="w-full h-full object-cover grayscale" />
+        <img src="/media-clear/Diseno-sin-titulo-1920x550.png" alt="Background by ceteos" className="w-full h-full object-cover grayscale" loading="lazy" width="1920" height="550" />
       </div>
 
       <div className="container mx-auto relative z-10 flex flex-col md:flex-row justify-between items-center text-gray-900 dark:text-white">
@@ -235,8 +247,11 @@ export const BrandLogos: React.FC = () => {
           <div key={i} className="flex-shrink-0 group flex flex-col items-center justify-center">
              <img 
                src={brand.logo} 
-               alt={brand.name} 
+               alt={`${brand.name} by ceteos`} 
                className="h-10 md:h-12 w-auto object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 dark:brightness-0 dark:invert"
+               loading="lazy"
+               width="150"
+               height="50"
              />
           </div>
         ))}
@@ -276,7 +291,7 @@ export const BlogSection: React.FC = () => {
         {blogPosts.map(post => (
           <div key={post.id} className="group philips-glass p-6 rounded-[2rem] border border-white/5 glass-hover">
             <div className="overflow-hidden mb-6 relative aspect-[3/2] rounded-2xl shadow-xl">
-              <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+              <img src={post.image} alt={`${post.title} by ceteos`} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" loading="lazy" width="600" height="400" />
             </div>
             <h3 className="text-xs font-bold text-gray-800 dark:text-gray-100 mb-3 uppercase tracking-widest leading-relaxed group-hover:text-gold-500 transition-colors">
               {post.title}

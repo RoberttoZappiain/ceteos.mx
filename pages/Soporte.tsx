@@ -1,10 +1,17 @@
 import React from 'react';
+import { SEOHead } from '../components/SEOHead';
 import { SectionHeader } from '../components/Common';
 import { ContactForm } from '../components/ContactForm';
 
 export const SoporteTecnico: React.FC = () => {
   return (
     <div className="container mx-auto px-4 md:px-8 py-4 relative z-10">
+      <SEOHead 
+        title="ceteos.mx | Soporte Técnico" 
+        description="Soporte Técnico Especializado Nivel 1, 2 y 3. Help Desk, SysAdmin e Ingeniería en Infraestructura. Disponibilidad 24/7 para tu empresa."
+        keywords="soporte tecnico, help desk, sysadmin, mantenimiento computadoras, soporte servidores, ceteos soporte"
+        url="/soporte-tecnico"
+      />
       
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-8 animate-fade-in">

@@ -27,6 +27,7 @@ export const TopBar: React.FC<TopBarProps> = ({ isDarkMode, toggleTheme }) => {
             onClick={toggleTheme} 
             className="flex items-center gap-2 hover:text-gold-500 transition-colors group"
             title={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+            aria-label={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
             >
             <i className={`fa-solid ${isDarkMode ? 'fa-sun' : 'fa-moon'} text-xs group-hover:rotate-12 transition-transform`}></i>
             <span className=" sm:inline">{isDarkMode ? 'MODO CLARO' : 'MODO OSCURO'}</span>
@@ -212,7 +213,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContact, mobileMen
             Cotizar Proyecto
           </button>
 
-          <button className="lg:hidden w-12 h-12 rounded-xl glass-interactive flex items-center justify-center text-gray-800 dark:text-white" onClick={() => setMobileMenuOpen(true)}>
+          <button className="lg:hidden w-12 h-12 rounded-xl glass-interactive flex items-center justify-center text-gray-800 dark:text-white" onClick={() => setMobileMenuOpen(true)} aria-label="Abrir menú">
              <i className="fa-solid fa-bars-staggered"></i>
           </button>
         </div>
@@ -225,7 +226,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContact, mobileMen
           <div className="absolute top-0 right-0 bottom-0 w-[300px] sm:w-[320px] philips-glass shadow-2xl flex flex-col slide-in-right border-l border-white/20 backdrop-blur-3xl">
              <div className="flex items-center justify-between p-8 border-b border-white/10">
                <span className="font-black tracking-[0.3em] text-gray-900 dark:text-white uppercase text-sm">Navegación</span>
-               <button onClick={() => setMobileMenuOpen(false)} className="w-12 h-12 flex items-center justify-center rounded-xl glass-interactive">
+               <button onClick={() => setMobileMenuOpen(false)} className="w-12 h-12 flex items-center justify-center rounded-xl glass-interactive" aria-label="Cerrar menú">
                  <i className="fa-solid fa-xmark text-lg"></i>
                </button>
              </div>
@@ -339,6 +340,7 @@ export const Footer: React.FC = () => {
           <button 
              onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
              className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center glass-interactive rounded-2xl hover:bg-gold-500 hover:text-white transition-all shadow-2xl active:scale-90"
+             aria-label="Volver arriba"
           >
             <i className="fa-solid fa-chevron-up"></i>
           </button>
@@ -351,7 +353,7 @@ export const Footer: React.FC = () => {
 export const FloatingWhatsApp: React.FC<{ isHidden?: boolean }> = ({ isHidden }) => {
   return (
     <a 
-      href="https://wa.me/1234567890"
+      href="https://wa.me/+5215630146357"
       target="_blank"
       rel="noopener noreferrer"
       className={`fixed bottom-8 right-8 z-[150] flex items-center justify-center w-16 h-16 rounded-full bg-[#25D366]/90 backdrop-blur-md shadow-[0_0_20px_rgba(37,211,102,0.4)] text-white hover:bg-[#20bd5a] hover:scale-110 transition-all duration-300 group ${isHidden ? 'opacity-0 scale-0 pointer-events-none translate-y-20' : 'opacity-100 scale-100 translate-y-0'}`}

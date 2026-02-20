@@ -1,4 +1,5 @@
 import React from 'react';
+import { SEOHead } from '../components/SEOHead';
 import { SectionHeader, ProductCard } from '../components/Common';
 import { ContactForm } from '../components/ContactForm';
 import { categories, products } from '../data';
@@ -15,6 +16,12 @@ export const Infraestructura: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 md:px-8 py-4 relative z-10">
+      <SEOHead 
+        title="ceteos.mx | Infraestructura Tecnológica" 
+        description="Servicios de Infraestructura Tecnológica: Cableado estructurado, CCTV, Mantenimiento de Sites y Servidores. Garantizamos la continuidad de tu negocio."
+        keywords="infraestructura ti, cableado estructurado, mantenimiento site, cctv, servidores, redes, ceteos infraestructura"
+        url="/infraestructura-tecnologica"
+      />
       
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-8 animate-fade-in">
@@ -62,7 +69,7 @@ export const Infraestructura: React.FC = () => {
                   </div>
                   <img 
                     src="/media-clear/antes.jpg" 
-                    alt="Site antes del mantenimiento" 
+                    alt="Site antes del mantenimiento by ceteos" 
                     className="w-full h-[400px] object-cover transition-transform duration-700 group-hover/card:scale-105 filter grayscale-[30%] group-hover/card:grayscale-0"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100"></div>
@@ -79,8 +86,8 @@ export const Infraestructura: React.FC = () => {
                      <i className="fa-solid fa-check-circle mr-2"></i> Después
                   </div>
                   <img 
-                    src="/media-clear/Gemini_Generated_Image_1cog3y1cog3y1cog.png" 
-                    alt="Site optimizado" 
+                    src="/media-clear/site-maintenance-plus-mantenimiento-site-by-ceteos.png" 
+                    alt="Site optimizado by ceteos" 
                     className="w-full h-[400px] object-cover transition-transform duration-700 group-hover/card:scale-105"
                   />
                   {/* Tech Overlay Effect */}

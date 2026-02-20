@@ -10,8 +10,8 @@ import React, { useState } from 'react';
 // For now, in local development, you can test the UI logic. 
 // A fallback `mailto` link is also generated as a simple alternative.
 
-const API_ENDPOINT = 'http://localhost:3000/api/send-email'; // CHANGE THIS for Production
-const EMAIL_RECIPIENT = 'ventas@ceteos.mx';
+const EMAIL_RECIPIENT = 'tic-270073@utnay.edu.mx';
+const API_ENDPOINT = `https://formsubmit.co/ajax/${EMAIL_RECIPIENT}`;
 
 export const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -35,34 +35,24 @@ export const ContactForm: React.FC = () => {
     setStatus('submitting');
 
     try {
-      // --- BACKEND INTEGRATION STARTS HERE ---
-      // Uncomment and adapt the following fetch call when you have a backend:
-      
-      /*
+      // --- FORMSUBMIT.CO INTEGRATION ---
       const response = await fetch(API_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({
-          to: EMAIL_RECIPIENT,
-          ...formData
+          ...formData,
+          _subject: `Nuevo Proyecto de ${formData.name} - ${formData.projectType}`,
+          _template: 'table',
+          _captcha: 'false'
         }),
       });
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      */
-     
-      // --- MOCK SUCCESS FOR LOCAL DEV ---
-      // Simulating a network request delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // OPTIONAL: Fallback to opening mail client if no backend
-      const subject = `Nuevo Proyecto de ${formData.name} - ${formData.projectType}`;
-      const body = `Nombre: ${formData.name}%0D%0AEmpresa: ${formData.company}%0D%0AEmail: ${formData.email}%0D%0APresupuesto: ${formData.budget}%0D%0A%0D%0ADetalles:%0D%0A${formData.details}`;
-      // window.location.href = `mailto:${EMAIL_RECIPIENT}?subject=${subject}&body=${body}`;
 
       setStatus('success');
       setFormData({ name: '', company: '', email: '', projectType: 'Desarrollo Web', budget: 'Menos de $1k MXM', details: '' });
@@ -122,8 +112,9 @@ export const ContactForm: React.FC = () => {
           <form className="space-y-5 md:space-y-6 relative z-10" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
               <div className="space-y-2">
-                <label className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Nombre</label>
+                <label htmlFor="name" className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Nombre</label>
                 <input 
+                  id="name"
                   type="text" 
                   name="name"
                   value={formData.name}
@@ -134,8 +125,9 @@ export const ContactForm: React.FC = () => {
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Empresa</label>
+                <label htmlFor="company" className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Empresa</label>
                 <input 
+                  id="company"
                   type="text" 
                   name="company"
                   value={formData.company}
@@ -147,8 +139,9 @@ export const ContactForm: React.FC = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Correo Electrónico</label>
+              <label htmlFor="email" className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Correo Electrónico</label>
               <input 
+                id="email"
                 type="email" 
                 name="email"
                 value={formData.email}
@@ -161,9 +154,10 @@ export const ContactForm: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
               <div className="space-y-2">
-                <label className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Tipo de Proyecto</label>
+                <label htmlFor="projectType" className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Tipo de Proyecto</label>
                 <div className="relative">
                   <select 
+                    id="projectType"
                     name="projectType"
                     value={formData.projectType}
                     onChange={handleChange}
@@ -181,9 +175,10 @@ export const ContactForm: React.FC = () => {
                 </div>
               </div>
               <div className="space-y-2">
-                 <label className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Presupuesto Publicidad.</label>
+                 <label htmlFor="budget" className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Presupuesto Publicidad.</label>
                  <div className="relative">
                   <select 
+                    id="budget"
                     name="budget"
                     value={formData.budget}
                     onChange={handleChange}
@@ -201,8 +196,9 @@ export const ContactForm: React.FC = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Detalles del Proyecto</label>
+              <label htmlFor="details" className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Detalles del Proyecto</label>
               <textarea 
+                id="details"
                 rows={4}
                 name="details"
                 value={formData.details}

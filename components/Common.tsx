@@ -35,8 +35,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div className="relative w-full aspect-[3/4] overflow-hidden rounded-xl bg-black/5 dark:bg-white/5 mb-4">
         <img 
           src={product.image} 
-          alt={product.name} 
+          alt={`${product.name} by ceteos`} 
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+          loading="lazy"
+          width="300"
+          height="400"
         />
         
         {/* Badges */}
@@ -86,7 +89,7 @@ export const PromoCard: React.FC<PromoCardProps> = ({ title, subtitle, image, co
         </button>
       </div>
       <div className="w-1/2 h-full absolute right-0 top-0 bottom-0 overflow-hidden">
-         <img src={image} alt={subtitle} className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700 rounded-l-3xl" />
+         <img src={image} alt={`${subtitle} by ceteos`} className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700 rounded-l-3xl" loading="lazy" width="400" height="200" />
       </div>
     </div>
   );
@@ -108,7 +111,7 @@ export const SidebarBanner: React.FC<{
         <button className="mt-4 text-[10px] font-bold uppercase tracking-widest border-b border-white/20 dark:text-gray-200 pb-1 hover:text-gold-500 hover:border-gold-500 transition-colors">CONTACTAR</button>
       </div>
       <div className="mt-8 w-full">
-        <img src={image} alt="Banner" className="w-full object-contain opacity-90 transition-transform duration-700 hover:scale-105" />
+        <img src={image} alt="Banner by ceteos" className="w-full object-contain opacity-90 transition-transform duration-700 hover:scale-105" loading="lazy" width="300" height="600" />
       </div>
     </div>
   );

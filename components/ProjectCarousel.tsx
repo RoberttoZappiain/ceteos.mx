@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
 const PROJECT_IMAGES = [
-  '/media-clear/proyects/more/blog-malandro.png',
-  '/media-clear/proyects/more/e-learning.png',
-  '/media-clear/proyects/more/eccomerce.png',
-  '/media-clear/proyects/more/imac27.png',
-  '/media-clear/proyects/more/landing-abogados.png',
-  '/media-clear/proyects/more/rifas-bahia.png',
-  '/media-clear/proyects/more/ruedas-patas.png',
-  '/media-clear/proyects/more/sass-personalizado.webp',
-  '/media-clear/proyects/more/sitio-medico.png'
+  '/media-clear/proyects/more/blog-malandro-by-ceteos.png',
+  '/media-clear/proyects/more/e-learning-platform-by-ceteos.png',
+  '/media-clear/proyects/more/ecommerce-solution-by-ceteos.png',
+  '/media-clear/proyects/more/imac-display-mockup-by-ceteos.png',
+  '/media-clear/proyects/more/landing-page-abogados-legal-by-ceteos.png',
+  '/media-clear/proyects/more/rifas-bahia-app-by-ceteos.png',
+  '/media-clear/proyects/more/ruedas-patas-pet-shop-by-ceteos.png',
+  '/media-clear/proyects/more/sass-dashboard-personalizado-by-ceteos.png',
+  '/media-clear/proyects/more/sitio-medico-healthcare-by-ceteos.png'
 ];
 
 export const ProjectCarousel: React.FC = () => {
@@ -36,7 +36,7 @@ export const ProjectCarousel: React.FC = () => {
             <img 
                 key={src}
                 src={src}
-                alt={`Project ${index + 1}`}
+                alt={`Proyecto de Software ${index + 1} - Desarrollo Web y Móvil by ceteos`}
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
                     index === activeIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
                 }`}

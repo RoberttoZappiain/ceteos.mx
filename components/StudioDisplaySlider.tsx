@@ -3,11 +3,11 @@ import { DeviceFrameset } from 'react-device-frameset';
 import 'react-device-frameset/styles/marvel-devices.min.css';
 
 const SLIDE_IMAGES = [
-  '/media-clear/proyects/cobreapp.png',
-  '/media-clear/proyects/img2.jpeg',
-  '/media-clear/proyects/buffete.png',
-  '/media-clear/proyects/hospital.png',
-  '/media-clear/proyects/nexus.png',
+  '/media-clear/proyects/cobreapp-fintech-dashboard-by-ceteos.png',
+  '/media-clear/proyects/corporate-dashboard-analytics-by-ceteos.jpeg',
+  '/media-clear/proyects/buffete-legal-website-by-ceteos.png',
+  '/media-clear/proyects/hospital-management-system-by-ceteos.png',
+  '/media-clear/proyects/nexus-erp-system-by-ceteos.png',
 
 ];
 
@@ -106,7 +106,7 @@ export const StudioDisplaySlider: React.FC = () => {
                       <img
                           key={index}
                           src={src}
-                          alt={`Mac Slide ${index + 1}`}
+                          alt={`MacBook Pro Display - Proyecto Software ${index + 1} by ceteos`}
                           className={`absolute top-0 left-0 w-full h-full object-fill transition-opacity duration-1000 ${
                               index === macIndex ? 'opacity-100' : 'opacity-0'
                           }`}
@@ -167,8 +167,8 @@ export const StudioDisplaySlider: React.FC = () => {
               <div className="w-full h-full relative bg-black group">
                   {/* Static Image */}
                   <img
-                      src="/media-clear/proyects/nexus-movil.png"
-                      alt="Nexus Mobile App"
+                      src="/media-clear/proyects/nexus-movil-app-ios-by-ceteos.png"
+                      alt="Nexus Mobile App - Aplicación Móvil iOS by ceteos"
                       className="absolute top-0 left-0 w-full h-full object-cover"
                   />
                   {/* Overlay Vignette */}

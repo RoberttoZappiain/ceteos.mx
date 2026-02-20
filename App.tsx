@@ -110,7 +110,7 @@ const HomePage: React.FC = () => {
         sidebarConfig={{
           title: "INSTALACIÓN O VENTA",
           subtitle: "instalamos tu starlink o cotizamos una nueva.",
-          image: "/media-clear/star-pre.png",
+          image: "/media-clear/instalacion-de-starlinks-infraestructura-by-ceteos.png",
           position: "left"
         }}
       />
@@ -124,7 +124,7 @@ const HomePage: React.FC = () => {
             {products.slice(0, 6).map(p => (
               <div key={p.id} className="scale-90 origin-top group cursor-pointer">
                 <div className="overflow-hidden mb-2">
-                  <img src={p.image} className="transition-transform duration-500 group-hover:scale-110" alt=""/>
+                  <img src={p.image} className="transition-transform duration-500 group-hover:scale-110" alt={`${p.name} thumbnail by ceteos`}/>
                 </div>
                 <p className="text-xs font-bold text-center dark:text-gray-200">{p.name}</p>
               </div>

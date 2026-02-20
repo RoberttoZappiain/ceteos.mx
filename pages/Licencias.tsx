@@ -1,4 +1,5 @@
 import React from 'react';
+import { SEOHead } from '../components/SEOHead';
 import { SectionHeader, ProductCard } from '../components/Common';
 import { ContactForm } from '../components/ContactForm';
 import { categories, products, brands } from '../data';
@@ -15,6 +16,12 @@ export const Licencias: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 md:px-8 py-4 relative z-10">
+      <SEOHead 
+        title="ceteos.mx | Suite de Licencias" 
+        description="Venta de Licencias de Software Original: Microsoft, Adobe, Autodesk, Antivirus y más. Software legal y seguro para empresas y profesionales."
+        keywords="licencias software, microsoft office, windows 11, adobe creative cloud, autodesk autocad, antivirus, ceteos licencias"
+        url="/suite-licencias"
+      />
       
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-8 animate-fade-in">
@@ -190,7 +197,7 @@ export const Licencias: React.FC = () => {
                     <img 
                         key={idx} 
                         src={brand.logo} 
-                        alt={brand.name} 
+                        alt={`${brand.name} by ceteos`} 
                         className="h-8 md:h-10 w-auto object-contain hover:scale-110 transition-transform duration-300 dark:invert" 
                     />
                 ))}
