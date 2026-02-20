@@ -28,26 +28,42 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   const fullUrl = url.startsWith('http') ? url : `${SITE_URL}${url}`;
   const fullImage = image.startsWith('http') ? image : `${SITE_URL}${image}`;
 
-  const schemaOrg = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Ceteos Technologies Company",
-    "url": SITE_URL,
-    "logo": `${SITE_URL}/media-clear/logo-ceteos.png`,
-    "sameAs": [
-      "https://www.facebook.com/ceteos.mx",
-      "https://twitter.com/ceteos",
-      "https://www.instagram.com/ceteos.mx",
-      "https://www.linkedin.com/company/ceteos"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+52-56-3014-6357",
-      "contactType": "customer service",
-      "areaServed": "MX",
-      "availableLanguage": ["es", "en"]
+  const schemaOrg = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Ceteos Technologies Company",
+      "url": SITE_URL,
+      "logo": `${SITE_URL}/media-clear/logo-ceteos.png`,
+      "sameAs": [
+        "https://www.facebook.com/ceteos.mx",
+        "https://twitter.com/ceteos",
+        "https://www.instagram.com/ceteos.mx",
+        "https://www.linkedin.com/company/ceteos"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+52-56-3014-6357",
+        "contactType": "customer service",
+        "areaServed": "MX",
+        "availableLanguage": ["es", "en"]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": SITE_NAME,
+      "url": SITE_URL,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": `${SITE_URL}/?q={search_term_string}`
+        },
+        "query-input": "required name=search_term_string"
+      }
     }
-  };
+  ];
 
   return (
     <Helmet>
